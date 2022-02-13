@@ -13,8 +13,8 @@ public class Task extends Table{
     @Entity(type="INTEGER",size = 32, primary = true)
     int id;
 
-    @Entity(type="INTEGER",size = 25)
-    long pauseLength;
+    @Entity(type="DOUBLE",size = 25)
+    Double pauseLength;
 
     @Entity(type = "DATE",isnull = false)
     Date date;
@@ -25,14 +25,13 @@ public class Task extends Table{
     @Entity(type = "TIME")
     Time endTime;
 
-
     @Entity(type="INTEGER",size=32)
     @ForeignKey(table ="User", attribute = "id")
     int User_FK;
 
-    @Entity(type="INTEGER",size = 32)
-    @ForeignKey(table = "RealEstate", attribute = "id")
-    int RealEstate_FK;
+    @Entity(type = "INTEGER",size = 32)
+    @ForeignKey(table = "Client",attribute = "id")
+    int Client_FK;
 
     public int getId() {
         return id;
@@ -42,11 +41,11 @@ public class Task extends Table{
         this.id = id;
     }
 
-    public long getPauseLength() {
+    public Double getPauseLength() {
         return pauseLength;
     }
 
-    public void setPauseLength(long pauseLength) {
+    public void setPauseLength(Double pauseLength) {
         this.pauseLength = pauseLength;
     }
 
@@ -84,11 +83,12 @@ public class Task extends Table{
         User_FK = user_FK;
     }
 
-    public RealEstate getRealEstate()throws Exception { return (RealEstate) Table.get(RealEstate.class,RealEstate_FK); }
-
-    public void setRealEstate_FK(int realEstate_FK) {
-        RealEstate_FK = realEstate_FK;
+    public Client getClient()throws Exception
+    {
+        return (Client) Table.get(Client.class,Client_FK);
     }
 
-
+    public void setClient_FK(int client_FK) {
+        Client_FK = client_FK;
+    }
 }

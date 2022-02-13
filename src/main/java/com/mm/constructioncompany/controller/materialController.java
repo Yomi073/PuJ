@@ -63,7 +63,7 @@ public class materialController implements Initializable {
         if (selectedMaterial != null){
             try {
                 selectedMaterial.delete();
-                this.fillUsers();
+                this.fillMaterials();
                 this.removeSelection();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -74,14 +74,13 @@ public class materialController implements Initializable {
     @FXML
     void onSave(ActionEvent event) {
         String name = this.nameTxt.getText();
-
         String quantity = this.quantityTxt.getText();
         String purchasePrice = this.purchasePriceTxt.getText();
         String sellingPrice = this.sellingPriceTxt.getText();
 
-        if (name.equals("")||purchasePrice.equals("")||sellingPrice.equals(""))
+        if (name.equals("")||purchasePrice.equals("")||sellingPrice.equals("") || quantity==null || !isNumeric(quantity))
         {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "All fields are mandatory except length and pieces!", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.WARNING, "All fields are mandatory and quantity must be a number", ButtonType.OK);
             alert.setTitle("Warning");
             alert.setHeaderText("Input error!");
             alert.showAndWait();
@@ -96,22 +95,22 @@ public class materialController implements Initializable {
             }
             m.setName(name);
             m.setQuantity(Double.valueOf(quantity));
-            m.setPurchasePrice(purchasePrice);
-            m.setSellingPrice(sellingPrice);
+            m.setPurchasePrice(Double.valueOf(purchasePrice));
+            m.setSellingPrice(Double.valueOf(sellingPrice));
             try {
                 if (this.selectedMaterial == null) {
                     m.save();
-                    this.fillUsers();
+                    this.fillMaterials();
                     this.removeSelection();
                 }
                 else
                 {
                     m.update();
-                    this.fillUsers();
+                    this.fillMaterials();
                     this.removeSelection();
                 }
 
-                fillUsers();
+                fillMaterials();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -136,13 +135,13 @@ public class materialController implements Initializable {
                     (Callback<TableColumn.CellDataFeatures<MaterialStock, Double>, SimpleDoubleProperty>) materialsLongCellDataFeatures -> new SimpleDoubleProperty(materialsLongCellDataFeatures.getValue().getQuantity())
             );
             purchasePriceTblCol.setCellValueFactory(
-                    (Callback<TableColumn.CellDataFeatures<MaterialStock, String>, SimpleStringProperty>) materialsLongCellDataFeatures -> new SimpleStringProperty(materialsLongCellDataFeatures.getValue().getPurchasePrice())
+                    (Callback<TableColumn.CellDataFeatures<MaterialStock, Double>, SimpleDoubleProperty>) materialsLongCellDataFeatures -> new SimpleDoubleProperty(materialsLongCellDataFeatures.getValue().getPurchasePrice())
             );
             sellingPriceTblCol.setCellValueFactory(
-                    (Callback<TableColumn.CellDataFeatures<MaterialStock, String>, SimpleStringProperty>) materialsLongCellDataFeatures -> new SimpleStringProperty(materialsLongCellDataFeatures.getValue().getSellingPrice())
+                    (Callback<TableColumn.CellDataFeatures<MaterialStock, Double>, SimpleDoubleProperty>) materialsLongCellDataFeatures -> new SimpleDoubleProperty(materialsLongCellDataFeatures.getValue().getSellingPrice())
             );
 
-            fillUsers();
+            fillMaterials();
 
             searchTxt.textProperty().addListener((observable, oldValue, newValue) ->
                     {
@@ -160,7 +159,7 @@ public class materialController implements Initializable {
         }
     }
 
-    private void fillUsers(){
+    private void fillMaterials(){
         try {
             List<?> materialsList = Table.list(MaterialStock.class);
             ObservableList<?> materialsObservableList = FXCollections.observableList(materialsList);
@@ -173,7 +172,7 @@ public class materialController implements Initializable {
     @FXML
     protected void removeSelection() {
         this.selectedMaterial = null;
-        this.fillUsers();
+        this.fillMaterials();
         this.btnAdd.setText("Add");
         this.nameTxt.setText("");
         this.quantityTxt.setText("");
@@ -188,8 +187,8 @@ public class materialController implements Initializable {
         this.btnAdd.setText("Edit");
         this.nameTxt.setText(this.selectedMaterial.getName());
         this.quantityTxt.setText(String.valueOf(this.selectedMaterial.getQuantity()));
-        this.sellingPriceTxt.setText(this.selectedMaterial.getSellingPrice());
-        this.purchasePriceTxt.setText(this.selectedMaterial.getPurchasePrice());
+        this.sellingPriceTxt.setText(String.valueOf(this.selectedMaterial.getSellingPrice()));
+        this.purchasePriceTxt.setText(String.valueOf(this.selectedMaterial.getPurchasePrice()));
 
     }
 
@@ -197,11 +196,12 @@ public class materialController implements Initializable {
 
     private boolean searchFindsMaterial(MaterialStock material, String searchText) throws Exception {
         return (material.getName().toLowerCase().contains(searchText.toLowerCase())) ||
-                !               (String.valueOf((material.getQuantity())).contains(searchText.toLowerCase())) ||
-                Integer.valueOf(material.getId()).toString().equals(searchText.toLowerCase())||
-                (material.getSellingPrice().toLowerCase().contains(searchText.toLowerCase())) ||
-                (material.getPurchasePrice().toLowerCase().contains(searchText.toLowerCase()));
+               (String.valueOf((material.getQuantity())).contains(searchText.toLowerCase())) ||
+               (Integer.valueOf(material.getId()).toString().equals(searchText.toLowerCase())) ||
+               (Double.valueOf(material.getSellingPrice()).toString().equals(searchText.toLowerCase())) ||
+               (Double.valueOf(material.getPurchasePrice()).toString().equals(searchText.toLowerCase()));
     }
+
 
     private ObservableList<MaterialStock> filterList(List<MaterialStock> list, String searchText) throws Exception {
         List<MaterialStock> filteredList = new ArrayList<>();
@@ -210,5 +210,16 @@ public class materialController implements Initializable {
                 filteredList.add(material);
         }
         return FXCollections.observableList(filteredList);
+    }
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 }

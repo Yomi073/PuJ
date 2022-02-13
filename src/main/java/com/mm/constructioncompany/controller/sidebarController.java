@@ -30,10 +30,6 @@ public class sidebarController {
         Main.showWindow("materials.fxml","Materials", 1200, 800);
     }
 
-    @FXML
-    void btnRealEstatesClicked(ActionEvent event) throws Exception{
-        Main.showWindow("realEstates.fxml","Real Estates", 1200, 800);
-    }
 
     @FXML
     void btnTasksClicked(ActionEvent event)throws Exception
@@ -47,11 +43,7 @@ public class sidebarController {
         Main.showWindow("users.fxml","Users", 1200, 800);
     }
 
-    @FXML
-    void btnVehiclesClicked(ActionEvent event)throws Exception
-    {
-        Main.showWindow("vehicles.fxml","Vehicles", 1200, 800);
-    }
+
     @FXML
     void btnLogoutClicked(ActionEvent event)throws Exception
     {

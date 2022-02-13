@@ -6,43 +6,39 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mm.constructioncompany.controller.sidebarController">
+<AnchorPane prefHeight="675.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mm.constructioncompany.controller.sidebarController">
     <children>
-      <AnchorPane prefHeight="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <Button layoutX="1071.0" layoutY="38.0" mnemonicParsing="false" onAction="#btnLogoutClicked" prefHeight="30.0" prefWidth="100.0" text="Logout" />
-         </children>
-      </AnchorPane>
-      <AnchorPane prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="100.0">
-         <children>
-                <VBox prefHeight="685.0" prefWidth="170.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane prefHeight="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Button layoutX="1071.0" layoutY="38.0" mnemonicParsing="false" onAction="#btnLogoutClicked" prefHeight="30.0" prefWidth="100.0" text="Logout" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0" />
+            </children>
+        </AnchorPane>
+        <AnchorPane prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="100.0">
+            <children>
+                <VBox prefHeight="685.0" prefWidth="170.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <Button mnemonicParsing="false" onAction="#btnTasksClicked" prefHeight="75.0" prefWidth="150.0" text="Tasks">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                     <font>
-                        <Font name="Georgia" size="18.0" />
-                     </font></Button>
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                            <font>
+                                <Font name="Georgia" size="18.0" />
+                            </font></Button>
                         <Button fx:id="btnUsers" mnemonicParsing="false" onAction="#btnUsersClicked" prefHeight="75.0" prefWidth="150.0" text="Users">
-                     <font>
-                        <Font name="Georgia" size="18.0" />
-                     </font></Button>
+                            <font>
+                                <Font name="Georgia" size="18.0" />
+                            </font></Button>
                         <Button mnemonicParsing="false" onAction="#btnMaterialsClicked" prefHeight="75.0" prefWidth="150.0" text="Materials">
-                     <font>
-                        <Font name="Georgia" size="18.0" />
-                     </font></Button>
+                            <font>
+                                <Font name="Georgia" size="18.0" />
+                            </font></Button>
                         <Button mnemonicParsing="false" onAction="#btnClientsClicked" prefHeight="75.0" prefWidth="150.0" text="Clients">
-                     <font>
-                        <Font name="Georgia" size="18.0" />
-                     </font></Button>
-                        <Button mnemonicParsing="false" onAction="#btnRealEstatesClicked" prefHeight="75.0" prefWidth="150.0" text="Real Estates">
-                     <font>
-                        <Font name="Georgia" size="18.0" />
-                     </font></Button>
+                            <font>
+                                <Font name="Georgia" size="18.0" />
+                            </font></Button>
                     </children>
                 </VBox>
-         </children>
-      </AnchorPane>
+            </children>
+        </AnchorPane>
     </children>
 </AnchorPane>

@@ -22,14 +22,13 @@
                     </font>
                 </Text>
                 <TextField fx:id="nameTxt" layoutY="100.0" minHeight="30.0" prefHeight="30.0" prefWidth="100.0" promptText="Name" />
-                <TextField fx:id="lengthTxt" layoutX="100.0" layoutY="100.0" minHeight="30.0" prefWidth="100.0" promptText="Legnth" />
-                <TextField fx:id="purchasePriceTxt" layoutX="300.0" layoutY="100.0" minHeight="30.0" prefWidth="100.0" promptText="Purchase Price" />
-                <TextField fx:id="sellingPriceTxt" layoutX="400.0" layoutY="100.0" minHeight="30.0" prefWidth="100.0" promptText="Selling Price" />
-                <Button fx:id="btnAdd" layoutX="420.0" layoutY="158.0" minHeight="25.0" mnemonicParsing="false" onAction="#onSave" prefWidth="80.0" text="Add " />
-                <Button layoutX="340.0" layoutY="158.0" minHeight="25.0" mnemonicParsing="false" onAction="#onDelete" prefWidth="80.0" text="Delete" />
-            <TextField fx:id="piecesTxt" layoutX="200.0" layoutY="100.0" minHeight="30.0" prefWidth="100.0" promptText="Pieces" />
-            <Label layoutX="5.0" layoutY="41.0" prefHeight="30.0" prefWidth="129.0" text="Search a material" textAlignment="RIGHT" />
-            <TextField fx:id="searchTxt" layoutX="100.0" layoutY="44.0" prefHeight="25.0" prefWidth="396.0" promptText="Keywords..." />
+                <TextField fx:id="purchasePriceTxt" layoutX="200.0" layoutY="100.0" minHeight="30.0" prefWidth="100.0" promptText="Purchase Price" />
+                <TextField fx:id="sellingPriceTxt" layoutX="300.0" layoutY="100.0" minHeight="30.0" prefWidth="100.0" promptText="Selling Price" />
+                <Button fx:id="btnAdd" layoutX="320.0" layoutY="158.0" minHeight="25.0" mnemonicParsing="false" onAction="#onSave" prefWidth="80.0" text="Add " />
+                <Button layoutX="240.0" layoutY="158.0" minHeight="25.0" mnemonicParsing="false" onAction="#onDelete" prefWidth="80.0" text="Delete" />
+                <TextField fx:id="quantityTxt" layoutX="100.0" layoutY="100.0" minHeight="30.0" prefWidth="100.0" promptText="Quantity" />
+                <Label layoutX="5.0" layoutY="41.0" prefHeight="30.0" prefWidth="129.0" text="Search a material" textAlignment="RIGHT" />
+                <TextField fx:id="searchTxt" layoutX="100.0" layoutY="44.0" prefHeight="25.0" prefWidth="297.0" promptText="Keywords..." />
             </children>
         </AnchorPane>
         <AnchorPane prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
@@ -38,8 +37,7 @@
                     <columns>
                         <TableColumn fx:id="IDTblCol" minWidth="20.0" prefWidth="175.0" text="ID" />
                         <TableColumn fx:id="nameTblCol" minWidth="20.0" prefWidth="175.0" text="Name" />
-                        <TableColumn fx:id="lengthTblCol" minWidth="20.0" prefWidth="175.0" text="Lenght" />
-                  <TableColumn fx:id="piecesTblCol" minWidth="20.0" prefWidth="175.0" text="Pieces" />
+                        <TableColumn fx:id="quantityTblCol" minWidth="20.0" prefWidth="175.0" text="Quantity" />
                         <TableColumn fx:id="purchasePriceTblCol" minWidth="20.0" prefWidth="175.0" text="Purchase Price" />
                         <TableColumn fx:id="sellingPriceTblCol" minWidth="20.0" prefWidth="175.0" text="Selling Price" />
                     </columns>

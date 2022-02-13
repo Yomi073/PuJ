@@ -69,7 +69,7 @@ public class Client extends Table{
 
     public String toString()
     {
-        return this.id+" "+this.firstName;
+        return this.firstName;
     }
 
 }

@@ -13,32 +13,33 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mm.constructioncompany.controller.taskController">
 
-    <fx:include source="sidebar.fxml" />
-   <AnchorPane layoutX="150.0" layoutY="100.0" prefHeight="200.0" prefWidth="1052.0" style="-fx-background-color: #D3D3D3;" AnchorPane.bottomAnchor="500.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+   <fx:include source="sidebar.fxml" />
+   <AnchorPane layoutX="150.0" layoutY="100.0" prefHeight="200.0" style="-fx-background-color: #D3D3D3;" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
       <children>
-         <Text layoutX="10.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tasks information:">
+         <Text layoutX="10.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tasks information:" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
             <font>
                <Font size="16.0" />
             </font>
          </Text>
-         <Button fx:id="btnSave" layoutX="354.0" layoutY="158.0" minHeight="25.0" mnemonicParsing="false" onAction="#onSave" prefWidth="80.0" text="Add" />
-         <Button fx:id="btnDelete" layoutX="274.0" layoutY="158.0" minHeight="25.0" mnemonicParsing="false" onAction="#onDelete" prefWidth="80.0" text="Delete" />
-         <Label layoutX="10.0" layoutY="49.0" prefHeight="30.0" prefWidth="129.0" text="Search the task" textAlignment="RIGHT" />
-         <TextField fx:id="searchTxt" layoutX="98.0" layoutY="52.0" prefHeight="25.0" prefWidth="334.0" promptText="Keywords..." />
-         <ComboBox fx:id="selectWorker" layoutY="103.0" minHeight="30.0" prefWidth="130.0" promptText="Select worker" />
-         <ComboBox fx:id="selectRealEstate" layoutX="130.0" layoutY="103.0" minHeight="30.0" prefWidth="130.0" promptText="Select realestate" />
-         <DatePicker fx:id="datePick" layoutX="260.0" layoutY="103.0" minHeight="30.0" promptText="Pick a date" />
+         <Label layoutX="10.0" layoutY="49.0" prefHeight="30.0" prefWidth="90.0" text="Search the task" textAlignment="RIGHT" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0" />
+         <TextField fx:id="searchTxt" layoutX="98.0" layoutY="52.0" prefHeight="30.0" prefWidth="350.0" promptText="Keywords..." AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
+         <ComboBox fx:id="selectWorker" layoutX="9.0" layoutY="103.0" minHeight="30.0" prefWidth="130.0" promptText="Select worker" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="100.0" />
+         <ComboBox fx:id="selectClient" layoutX="139.0" layoutY="103.0" minHeight="30.0" prefWidth="130.0" promptText="Select client" AnchorPane.leftAnchor="140.0" AnchorPane.topAnchor="100.0" />
+         <DatePicker fx:id="datePick" layoutX="269.0" layoutY="103.0" minHeight="30.0" prefWidth="180.0" promptText="Pick a date" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="100.0" />
+         <Button fx:id="btnPreview" layoutX="124.0" layoutY="158.0" minHeight="30.0" mnemonicParsing="false" onAction="#onPreview" prefWidth="90.0" text="Preview" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="150.0" />
+         <Button fx:id="btnDelete" layoutX="204.0" layoutY="158.0" minHeight="30.0" mnemonicParsing="false" onAction="#onDelete" prefWidth="90.0" text="Delete" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="150.0" />
+         <Button fx:id="btnSave" layoutX="283.0" layoutY="158.0" minHeight="30.0" mnemonicParsing="false" onAction="#onSave" prefWidth="90.0" text="Add task" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="150.0" />
+         <Button fx:id="btnAddMaterial" layoutX="363.0" layoutY="158.0" minHeight="30.0" mnemonicParsing="false" onAction="#onAddMaterial" prefHeight="25.0" prefWidth="90.0" text="Add material" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="150.0" />
       </children>
    </AnchorPane>
-   <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
+   <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
       <children>
-         <TableView fx:id="tasksTbl" onMouseClicked="#selectTask" prefHeight="500.0" prefWidth="1052.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <TableView fx:id="tasksTbl" onMouseClicked="#selectTask" prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columns>
-               <TableColumn fx:id="IDTblCol" minWidth="20.0" prefWidth="102.0" text="ID" />
-               <TableColumn fx:id="workerTblCol" minWidth="20.0" prefWidth="110.0" text="Worker " />
-               <TableColumn fx:id="clientTblCol1" minWidth="20.0" prefWidth="100.0" text="Client" />
-               <TableColumn fx:id="realEstateTblCol" minWidth="20.0" prefWidth="196.0" text="Real Estate" />
-               <TableColumn fx:id="dateTblCol" minWidth="20.0" prefWidth="125.0" text="Date" />
+               <TableColumn fx:id="IDTblCol" minWidth="20.0" prefWidth="205.0" text="ID" />
+               <TableColumn fx:id="workerTblCol" minWidth="20.0" prefWidth="147.0" text="Worker " />
+               <TableColumn fx:id="clientTblCol" prefWidth="380.0" text="Client" />
+               <TableColumn fx:id="dateTblCol" minWidth="20.0" prefWidth="212.0" text="Date" />
             </columns>
          </TableView>
       </children>

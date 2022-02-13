@@ -212,4 +212,17 @@ public class Table {
         return list;
     }
 
+    public static List<tempTable> listTempTable(ResultSet rs) throws Exception {
+        List<tempTable> list = new ArrayList<>();
+        while(rs.next()){
+            tempTable tt = new tempTable();
+            tt.setId(rs.getInt(1));
+            tt.setName(rs.getString(2));
+            tt.setQuantity(rs.getDouble(3));
+            tt.setSellingPrice(rs.getDouble(4));
+            tt.setSum();
+            list.add(tt);
+        }
+        return list;
+    }
 }

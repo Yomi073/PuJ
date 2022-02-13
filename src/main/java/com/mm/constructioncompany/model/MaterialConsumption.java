@@ -4,12 +4,8 @@ public class MaterialConsumption extends Table{
     @Entity(type = "INTEGER",size=32,primary = true)
     int id;
 
-
-    @Entity(type = "VARCHAR",size = 25)
-    String length;
-
-    @Entity(type = "VARCHAR",size = 25)
-    String num_count;
+    @Entity(type = "DOUBLE",size = 25)
+    Double quantity;
 
     @Entity(type = "INTEGER",size=32)
     @ForeignKey(table = "MaterialStock",attribute = "id")
@@ -41,18 +37,9 @@ public class MaterialConsumption extends Table{
         this.materialStock_FK = materialStock_FK;
     }
 
-    public String getLength() {
-        return length;
-    }
+    public Double getQuantity() { return quantity; }
 
-    public void setLength(String length) {
-        this.length = length;
-    }
-
-    public String getNum_count() { return num_count; }
-
-    public void setNum_count(String num_count) {
-        this.num_count = num_count; }
+    public void setQuantity(Double quantity) { this.quantity = quantity; }
 
     public int getMaterialStock_FK() {
         return materialStock_FK;

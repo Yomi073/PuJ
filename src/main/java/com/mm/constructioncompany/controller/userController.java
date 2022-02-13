@@ -167,6 +167,7 @@ public class userController implements Initializable {
             e.printStackTrace();
         }
     }
+
     private void fillUsers(){
         try {
             List<?> usersList = Table.list(User.class);
@@ -176,7 +177,6 @@ public class userController implements Initializable {
             System.out.println(e.getMessage());
         }
     }
-
 
     @FXML
     public void onSave (ActionEvent evt){

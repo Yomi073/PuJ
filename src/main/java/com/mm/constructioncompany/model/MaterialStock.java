@@ -10,11 +10,11 @@ public class MaterialStock extends Table{
     @Entity(type="DOUBLE",isnull = false)
     Double quantity;
 
-    @Entity(type="VARCHAR", size=25)
-    String purchasePrice;
+    @Entity(type="DOUBLE", size=25)
+    Double purchasePrice;
 
-    @Entity(type="VARCHAR", size=25)
-    String sellingPrice;
+    @Entity(type="DOUBLE", size=25)
+    Double sellingPrice;
 
 
     public int getId() {
@@ -33,16 +33,31 @@ public class MaterialStock extends Table{
         this.name = name;
     }
 
-    public double getQuantity() { return quantity; }
+    public Double getQuantity() {
+        return quantity;
+    }
 
-    public void setQuantity(Double quantity) { this.quantity = quantity; }
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
+    }
 
-    public String getPurchasePrice() { return purchasePrice; }
+    public Double getPurchasePrice() {
+        return purchasePrice;
+    }
 
-    public void setPurchasePrice(String purchasePrice) { this.purchasePrice = purchasePrice; }
+    public void setPurchasePrice(Double purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
 
-    public String getSellingPrice() { return sellingPrice; }
+    public Double getSellingPrice() {
+        return sellingPrice;
+    }
 
-    public void setSellingPrice(String sellingPrice) { this.sellingPrice = sellingPrice; }
-
+    public void setSellingPrice(Double sellingPrice) {
+        this.sellingPrice = sellingPrice;
+    }
+    public String toString()
+    {
+        return this.name;
+    }
 }

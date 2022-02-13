@@ -2,39 +2,23 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="900.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mm.constructioncompany.controller.newTaskController">
-    <children>
-        <fx:include source="invoice.fxml" />
-      <AnchorPane prefHeight="900.0" prefWidth="390.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="630.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane prefHeight="900.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mm.constructioncompany.controller.newTaskController">
+   <children>
+      <fx:include source="invoice.fxml" />
+      <AnchorPane prefHeight="900.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="630.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ComboBox layoutX="48.0" layoutY="54.0" prefHeight="25.0" prefWidth="150.0" promptText="by name" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0" />
-            <ComboBox layoutX="50.0" layoutY="75.0" prefHeight="25.0" prefWidth="150.0" promptText="by email" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="80.0" />
-            <ComboBox layoutX="50.0" layoutY="113.0" prefHeight="25.0" prefWidth="150.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="110.0" />
-            <Label layoutX="57.0" layoutY="24.0" prefHeight="20.0" prefWidth="150.0" text="SELECT USER" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="30.0" />
-            <Label layoutX="50.0" layoutY="164.0" prefHeight="20.0" prefWidth="150.0" text="SELECT WORKER" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="200.0" />
-            <ComboBox layoutX="50.0" layoutY="227.0" prefHeight="25.0" prefWidth="150.0" promptText="by name" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="220.0" />
-            <ComboBox layoutX="60.0" layoutY="237.0" prefHeight="25.0" prefWidth="150.0" promptText="by username" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="250.0" />
-            <ComboBox layoutX="70.0" layoutY="247.0" prefHeight="25.0" prefWidth="150.0" promptText="by email" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="280.0" />
-            <Label layoutX="50.0" layoutY="364.0" prefHeight="20.0" prefWidth="150.0" text="SELECT MATERIAL" AnchorPane.topAnchor="360.0" />
-            <ComboBox layoutX="50.0" layoutY="391.0" prefHeight="25.0" prefWidth="150.0" promptText="by name" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="380.0" />
-            <TextField layoutX="56.0" layoutY="425.0" prefHeight="25.0" prefWidth="150.0" promptText="Quantity" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="410.0" />
-            <Button layoutX="220.0" layoutY="113.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Update" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="110.0" />
-            <Button layoutX="220.0" layoutY="280.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Update" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="280.0" />
-            <Button layoutX="220.0" layoutY="410.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Update" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="410.0" />
-            <DatePicker layoutX="50.0" layoutY="170.0" prefHeight="30.0" prefWidth="150.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="170.0" />
-            <Label layoutX="50.0" layoutY="150.0" prefHeight="20.0" prefWidth="150.0" text="SELECT DATE" />
-            <Button layoutX="220.0" layoutY="173.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Update" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="170.0" />
-            <Button layoutX="220.0" layoutY="794.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Update" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="800.0" />
-            <TextField layoutX="21.0" layoutY="500.0" prefHeight="345.0" prefWidth="195.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="480.0" />
-            <Button layoutX="220.0" layoutY="380.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Delete" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="380.0" />
-            <Button layoutX="220.0" layoutY="861.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Close" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="220.0" />
-            <Button layoutX="130.0" layoutY="861.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Reset" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="125.0" />
+            <Label layoutX="15.0" layoutY="169.0" prefHeight="20.0" prefWidth="150.0" text="SELECT MATERIAL" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="175.0" />
+            <ComboBox fx:id="selectMaterial" layoutX="22.0" layoutY="202.0" prefHeight="25.0" prefWidth="150.0" promptText="by name" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="200.0" />
+            <TextField fx:id="quantityTxt" layoutX="15.0" layoutY="244.0" prefHeight="25.0" prefWidth="150.0" promptText="Quantity" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="235.0" />
+            <TextField alignment="TOP_LEFT" layoutX="15.0" layoutY="284.0" prefHeight="460.0" prefWidth="255.0" promptText="COMMENT HERE:" AnchorPane.bottomAnchor="160.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="280.0" />
+            <Button layoutX="180.0" layoutY="235.0" mnemonicParsing="false" onAction="#onSave" prefHeight="25.0" prefWidth="80.0" text="Add" AnchorPane.leftAnchor="190.0" AnchorPane.topAnchor="235.0" />
+            <Button mnemonicParsing="false" onAction="#onDelete" prefHeight="25.0" prefWidth="80.0" text="Delete" AnchorPane.leftAnchor="190.0" AnchorPane.topAnchor="200.0" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Close" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="30.0" />
          </children>
       </AnchorPane>
-    </children>
+   </children>
 </AnchorPane>

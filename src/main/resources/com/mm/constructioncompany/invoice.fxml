@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="900.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mm.constructioncompany.controller.invoiceController">
    <children>
-      <AnchorPane layoutX="26.0" layoutY="25.0" prefHeight="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="14.0" layoutY="106.0" prefHeight="20.0" prefWidth="110.0" text="COMPANY NAME" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="15.0" />
             <Label layoutX="14.0" layoutY="126.0" prefHeight="20.0" prefWidth="110.0" text="COMP ADDRESS" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="15.0" />
@@ -22,41 +22,36 @@
                </font>
             </Label>
             <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Label layoutX="500.0" layoutY="150.0" prefHeight="20.0" prefWidth="110.0" text="Date" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" />
-            <Label layoutX="516.0" layoutY="120.0" prefHeight="20.0" prefWidth="110.0" text="INVOICE#" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="15.0" />
-            <Label layoutX="526.0" layoutY="130.0" prefHeight="20.0" prefWidth="110.0" text="CostumerID" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="15.0" />
-            <Label layoutX="516.0" layoutY="90.0" prefHeight="20.0" prefWidth="110.0" text="Phone" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="15.0" />
-            <Label layoutX="526.0" layoutY="100.0" prefHeight="20.0" prefWidth="110.0" text="Address" AnchorPane.bottomAnchor="90.0" AnchorPane.rightAnchor="15.0" />
-            <Label layoutX="521.0" layoutY="50.0" prefHeight="20.0" prefWidth="110.0" text="Name" AnchorPane.bottomAnchor="110.0" AnchorPane.rightAnchor="15.0" />
+            <Label fx:id="dateLbl" layoutX="500.0" layoutY="150.0" prefHeight="20.0" prefWidth="110.0" text="Date" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" />
+            <Label fx:id="invoiceLbl" layoutX="516.0" layoutY="120.0" prefHeight="20.0" prefWidth="110.0" text="INVOICE#" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="15.0" />
+            <Label fx:id="clientIdLbl" layoutX="526.0" layoutY="130.0" prefHeight="20.0" prefWidth="110.0" text="CostumerID" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="15.0" />
+            <Label fx:id="clientPhoneLbl" layoutX="516.0" layoutY="90.0" prefHeight="20.0" prefWidth="110.0" text="Phone" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="15.0" />
+            <Label fx:id="clientAdressLbl" layoutX="526.0" layoutY="100.0" prefHeight="20.0" prefWidth="110.0" text="Address" AnchorPane.bottomAnchor="90.0" AnchorPane.rightAnchor="15.0" />
+            <Label fx:id="clientNameLbl" layoutX="521.0" layoutY="50.0" prefHeight="20.0" prefWidth="110.0" text="Name" AnchorPane.bottomAnchor="110.0" AnchorPane.rightAnchor="15.0" />
             <Label layoutX="189.0" layoutY="160.0" prefHeight="20.0" prefWidth="110.0" text="Date" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="130.0" />
             <Label layoutX="205.0" layoutY="130.0" prefHeight="20.0" prefWidth="110.0" text="INVOICE#" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="130.0" />
             <Label layoutX="215.0" layoutY="140.0" prefHeight="20.0" prefWidth="110.0" text="CostumerID" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="130.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="215.0" layoutY="316.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="160.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
+      <AnchorPane prefHeight="200.0" AnchorPane.bottomAnchor="160.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
          <children>
-            <TableView layoutX="215.0" layoutY="154.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <columns>
-                <TableColumn minWidth="20.0" prefWidth="50.0" text="Index" />
-                <TableColumn prefWidth="175.0" text="Name" />
-                  <TableColumn prefWidth="75.0" text="Quantity" />
-                  <TableColumn prefWidth="100.0" text="Price" />
-                  <TableColumn prefWidth="100.0" text="Tax" />
-                  <TableColumn prefWidth="130.0" text="Sum" />
-              </columns>
+            <TableView fx:id="materialsTbl" layoutX="215.0" layoutY="154.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <columns>
+                  <TableColumn fx:id="idTblCol" minWidth="20.0" prefWidth="145.0" text="Index" />
+                  <TableColumn fx:id="nameTblCol" prefWidth="107.0" text="Name" />
+                  <TableColumn fx:id="quantityTblCol" prefWidth="139.0" text="Quantity" />
+                  <TableColumn fx:id="priceTblCol" prefWidth="76.0" text="Price" />
+                  <TableColumn fx:id="sumTblCol" prefWidth="160.0" text="Sum" />
+               </columns>
             </TableView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="215.0" layoutY="729.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <AnchorPane prefHeight="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Label layoutX="506.0" layoutY="14.0" prefHeight="20.0" prefWidth="110.0" text="SUM" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
-            <Label layoutX="516.0" layoutY="24.0" prefHeight="20.0" prefWidth="110.0" text="TAX" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="25.0" />
-            <Label layoutX="516.0" layoutY="44.0" prefHeight="20.0" prefWidth="110.0" text="TOTAL SUM" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="45.0" />
-            <Label layoutX="405.0" layoutY="15.0" prefHeight="20.0" prefWidth="70.0" text="Subtotal" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="5.0" />
-            <Label layoutX="400.0" layoutY="25.0" prefHeight="20.0" prefWidth="70.0" text="Tax" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="25.0" />
-            <Label layoutX="400.0" layoutY="45.0" prefHeight="20.0" prefWidth="70.0" text="TOTAL" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="45.0" />
+            <Label fx:id="totalSumLbl" layoutX="498.0" layoutY="22.0" prefHeight="20.0" prefWidth="110.0" text="TOTAL SUM" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="22.0" />
+            <Label layoutX="451.0" layoutY="22.0" prefHeight="20.0" prefWidth="70.0" text="TOTAL" AnchorPane.rightAnchor="109.0" AnchorPane.topAnchor="22.0" />
             <Label layoutX="15.0" layoutY="25.0" prefHeight="20.0" prefWidth="411.0" text="ADITIONAL COMMENTS" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="195.0" AnchorPane.topAnchor="5.0" />
-            <TextArea layoutX="106.0" layoutY="-35.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="22.0" />
+            <TextArea fx:id="commentTxt" layoutX="106.0" layoutY="-35.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="22.0" />
          </children>
       </AnchorPane>
    </children>

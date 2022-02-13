@@ -6,10 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.List;
 
 public class  Main extends Application {
     private static Stage primaryStage;
@@ -25,26 +28,21 @@ public class  Main extends Application {
         primaryStage.setScene(new Scene(root.load(), w, h));
         primaryStage.show();
     }
-
     public static void main(String[] args) {
         try {
 
             Table.create(Role.class);
             Table.create(User.class);
-
             Table.create(MaterialStock.class);
-            Table.create(RealEstate.class);
             Table.create(Client.class);
-            Table.create(ClientRealEstate.class);
-
             Table.create(Task.class);
             Table.create(MaterialConsumption.class);
 
         }
-        catch (SQLException e)
-        {
-           System.out.println(e.getMessage());
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
 
-        launch();}
+        launch();
+    }
 }
