@@ -225,4 +225,32 @@ public class Table {
         }
         return list;
     }
+/*
+    public static List<MaterialConsumption> listMaterialConsumption(ResultSet rs) throws Exception {
+        List<MaterialConsumption> list = new ArrayList<>();
+        while(rs.next()){
+            MaterialConsumption mc = new MaterialConsumption();
+            mc.setQuantity(rs.getDouble(9));
+            mc.setMaterialStock_FK(rs.getInt(10));
+            mc.setTask_FK(rs.getInt(11));
+            list.add(mc);
+        }
+        return list;
+    }
+
+
+ */
+public static List<MaterialConsumption> materialConsumptions(ResultSet rs) throws Exception {
+    List<MaterialConsumption> list = new ArrayList<>();
+    while(rs.next()){
+        MaterialConsumption mc = new MaterialConsumption();
+        mc.setId(rs.getInt(1));
+        mc.setMaterialStock_FK(rs.getInt(2));
+        mc.setTask_FK(rs.getInt(3));
+        mc.setQuantity(rs.getDouble(4));
+        list.add(mc);
+    }
+    return list;
+}
+
 }

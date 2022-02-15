@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -52,16 +53,16 @@ public class invoiceController implements Initializable {
     private Label clientPhoneLbl;
 
     @FXML
-    private TextArea commentTxt;
-
-    @FXML
     private Label dateLbl;
 
     @FXML
     private Label invoiceLbl;
 
+    @FXML
+    private Label totalSumLbl;
 
-    private Task selectedTask=null;
+
+    private static Task selectedTask=null;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -85,13 +86,12 @@ public class invoiceController implements Initializable {
                         (Callback<TableColumn.CellDataFeatures<tempTable, Double>, SimpleDoubleProperty>) tempTableLongCellDataFeatures -> new SimpleDoubleProperty(tempTableLongCellDataFeatures.getValue().getSum())
                 );
 
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-    private void fillTempTable(){
+    protected void fillTempTable(){
         try {
             List<tempTable> tempTableList = Table.listTempTable(makeQuery());
             ObservableList<tempTable> materialsObservableList = FXCollections.observableList(tempTableList);
@@ -105,6 +105,7 @@ public class invoiceController implements Initializable {
     {
         this.selectedTask=t;
     }
+
     public ResultSet makeQuery() throws SQLException {
         String SQL = "SELECT MaterialStock.id, MaterialStock.name, SUM(MaterialConsumption.quantity),MaterialStock.sellingPrice FROM Task LEFT JOIN MaterialConsumption ON Task.id = MaterialConsumption.task_FK LEFT JOIN MaterialStock ON MaterialConsumption.materialStock_FK = MaterialStock.id WHERE Task.id="+selectedTask.getId()+" GROUP BY MaterialStock.name ";
         Statement stmt = DatabaseConnection.CONNECTION.createStatement();
@@ -120,6 +121,22 @@ public class invoiceController implements Initializable {
         this.clientNameLbl.setText(this.selectedTask.getClient().getFirstName()+" "+this.selectedTask.getClient().getLastName());
         this.clientPhoneLbl.setText(this.selectedTask.getClient().getPhoneNumber());
         this.clientAdressLbl.setText(this.selectedTask.getClient().getAdress());
+        this.totalSumLbl.setText(getSum());
+
+    }
+    public String getSum()
+    {
+
+        Double sum=0.0;
+        for(int i=0;i<materialsTbl.getItems().size();i++)
+        {
+            tempTable item =(tempTable) materialsTbl.getItems().get(i);
+            TableColumn col = (TableColumn) materialsTbl.getColumns().get(4);
+            Double data = (Double) col.getCellObservableValue(item).getValue();
+            sum+=data;
+        }
+        return String.valueOf(sum);
+
     }
 
 

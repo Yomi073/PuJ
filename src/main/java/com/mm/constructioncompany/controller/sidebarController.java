@@ -22,25 +22,25 @@ public class sidebarController {
 
     @FXML
     void btnClientsClicked(ActionEvent event)throws Exception{
-        Main.showWindow("client.fxml","Clients", 1200, 800);
+        Main.showWindow("client.fxml","Clients", 1200, 740);
     }
 
     @FXML
     void btnMaterialsClicked(ActionEvent event) throws Exception{
-        Main.showWindow("materials.fxml","Materials", 1200, 800);
+        Main.showWindow("material.fxml","Materials", 1200, 740);
     }
 
 
     @FXML
     void btnTasksClicked(ActionEvent event)throws Exception
     {
-        Main.showWindow("tasks.fxml","Tasks", 1200, 800);
+        Main.showWindow("task.fxml","Tasks", 1200, 740);
     }
 
     @FXML
     void btnUsersClicked(ActionEvent event) throws Exception
     {
-        Main.showWindow("users.fxml","Users", 1200, 800);
+        Main.showWindow("user.fxml","Users", 1200, 740);
     }
 
 

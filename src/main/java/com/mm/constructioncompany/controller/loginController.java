@@ -72,10 +72,10 @@ public class loginController implements Initializable {
 
                     String view="";
                     String title="";
-                    if(loggedUser.getRole().getName().equals("Admin")||username.equals("Admin")&&password.equals(""))
+                    if(loggedUser.getRole().getName().equals("Admin"))
                     {
                         view = "adminView.fxml";
-                        title="Welcome ADMIN "+loggedUser.getUserName();
+                        title="Welcome "+loggedUser.getUserName();
                     }
                     else
                     {
@@ -84,7 +84,7 @@ public class loginController implements Initializable {
 
                     }
 
-                    Main.showWindow(view,title, 1200, 800);
+                    Main.showWindow(view,title, 1200, 740);
 
                 } else {
                     Alert alert = new Alert(Alert.AlertType.WARNING, "Entered data doesn't exist in database!!", ButtonType.OK);
@@ -152,7 +152,6 @@ public class loginController implements Initializable {
                     alert.setTitle("Success");
                     alert.setHeaderText("Success");
                     alert.showAndWait();
-                    System.out.println(CryptMD5.cryptWithMD5(password));
                     Main.showWindow("login.fxml", "Login to the system", 1200, 400);
                 }
             } catch (SQLException e) {

@@ -10,26 +10,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -91,13 +83,10 @@ public class taskController implements Initializable {
 
     @FXML
     void onSave(ActionEvent event) {
+        boolean isSelectWorkerEmpty =(this.selectWorker.getValue() == null);
+        boolean isSelectClientEmpty =(this.selectClient.getValue() == null);
 
-        boolean isSelectWorkerEmpty = this.selectWorker.getSelectionModel().isEmpty();
-        boolean isSelectClientEmpty = this.selectClient.getSelectionModel().isEmpty();
-        System.out.println(isSelectWorkerEmpty);
-        System.out.println(isSelectClientEmpty);
-        System.out.println(datePick.getValue());
-        if (isSelectWorkerEmpty || datePick.getValue() == null || isSelectClientEmpty) {
+        if (datePick.getValue() == null || isSelectClientEmpty || isSelectWorkerEmpty ) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter all fields!", ButtonType.OK);
             alert.setTitle("Warning");
             alert.setHeaderText("Input error!");
@@ -143,8 +132,10 @@ public class taskController implements Initializable {
         try {
             List<?> userList = Table.list(User.class);
             List<?> clientList = Table.list(Client.class);
+            List<?> taskList = Table.list(Task.class);
             ObservableList<?> observableTaskList = FXCollections.observableList(userList);
             ObservableList<?> observableClientList = FXCollections.observableList(clientList);
+            ObservableList<?> taskObservableList = FXCollections.observableList(taskList);
             selectWorker.setItems(observableTaskList);
             selectClient.setItems(observableClientList);
             btnPreview.setDisable(true);
@@ -181,17 +172,17 @@ public class taskController implements Initializable {
 
             fillTasks();
 
-/*
+
             searchTxt.textProperty().addListener((observable, oldValue, newValue) ->
                     {
                         try {
-                            usersTbl.setItems(filterList((List<User>) usersObservableList, newValue));
+                            tasksTbl.setItems(filterList((List<Task>) taskObservableList, newValue));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
             );
- */
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -211,8 +202,8 @@ public class taskController implements Initializable {
     protected void removeSelection() {
         this.selectedTask = null;
         this.fillTasks();
-        this.selectWorker.setValue("");
-        this.selectClient.setValue("");
+        this.selectWorker.valueProperty().set(null);
+        this.selectClient.valueProperty().set(null);
         this.btnSave.setText("Add");
         this.datePick.setValue(null);
         this.btnPreview.setDisable(true);
@@ -223,12 +214,11 @@ public class taskController implements Initializable {
     public void selectTask(MouseEvent evt) throws Exception {
         this.selectedTask = (Task) this.tasksTbl.getSelectionModel().getSelectedItem();
         this.btnSave.setText("Edit");
-        this.selectClient.setValue(this.selectedTask.getClient().getFirstName());
-        this.selectWorker.setValue(this.selectedTask.getUser().getUserName());
+        this.selectClient.setValue(this.selectedTask.getClient());
+        this.selectWorker.setValue(this.selectedTask.getUser());
         this.datePick.setValue(this.selectedTask.getDate().toLocalDate());
         this.btnPreview.setDisable(false);
         this.btnAddMaterial.setDisable(false);
-
     }
 
     public void onPreview() throws Exception {
@@ -241,7 +231,7 @@ public class taskController implements Initializable {
             incont.setSelectedTask(selectedTask);
             incont.initController();
             Stage stage = new Stage();
-            stage.setTitle("Set material");
+            stage.setTitle("View materials");
             stage.setScene(new Scene(root));
             stage.showAndWait();
         }
@@ -250,10 +240,11 @@ public class taskController implements Initializable {
     public void onAddMaterial() throws IOException {
         if (selectedTask != null) {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(Main.class.getResource("newTask.fxml"));
+            fxmlLoader.setLocation(Main.class.getResource("addMaterial.fxml"));
             Parent root = fxmlLoader.load();
-            newTaskController newTaskController = fxmlLoader.getController();
-            newTaskController.selectedTask = this.selectedTask;
+            addMaterialController addMaterialController = fxmlLoader.getController();
+            addMaterialController.setSelectedTask(this.selectedTask);
+            addMaterialController.initController();
             Stage stage = new Stage();
             stage.setTitle("Set material");
             stage.setScene(new Scene(root));
@@ -261,6 +252,26 @@ public class taskController implements Initializable {
         }
 
     }
+
+    private boolean searchFindsTask(Task task, String searchText) throws Exception {
+        return (task.getClient().getFirstName().toLowerCase().contains(searchText.toLowerCase())) ||
+                (task.getUser().getUserName().toLowerCase().contains(searchText.toLowerCase())) ||
+                Integer.valueOf(task.getId()).toString().equals(searchText.toLowerCase())||
+                (task.getDate().toString().toLowerCase().contains(searchText.toLowerCase()));
+
+    }
+
+    private ObservableList<Task> filterList(List<Task> list, String searchText) throws Exception {
+        List<Task> filteredList = new ArrayList<>();
+        for (Task task : list){
+            if(searchFindsTask(task, searchText))
+                filteredList.add(task);
+        }
+        return FXCollections.observableList(filteredList);
+    }
+
+
+
 }
 
 

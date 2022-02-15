@@ -1,5 +1,11 @@
 package com.mm.constructioncompany.model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MaterialConsumption extends Table{
     @Entity(type = "INTEGER",size=32,primary = true)
     int id;
@@ -21,7 +27,7 @@ public class MaterialConsumption extends Table{
     }
 
     public void setId(int id) {
-        id = id;
+        this.id = id;
     }
 
     public Task getTask()throws Exception { return (Task) Table.get(Task.class,task_FK); }
@@ -47,5 +53,22 @@ public class MaterialConsumption extends Table{
 
     public int getTask_FK() {
         return task_FK;
+    }
+
+    public ArrayList<MaterialStock> list() throws SQLException {
+        String SQL = "SELECT MaterialStock.id,MaterialStock.name,MaterialStock.quantity,MaterialStock.purchasePrice,MaterialStock.sellingPrice FROM MaterialStock LEFT JOIN MaterialConsumption ON "+this.materialStock_FK+"=MaterialConsumption.materialStock_FK";
+        Statement stmt = DatabaseConnection.CONNECTION.createStatement();
+        ResultSet rs = stmt.executeQuery(SQL);
+        ArrayList<MaterialStock> list = new ArrayList<>();
+        while(rs.next()){
+            MaterialStock ms = new MaterialStock();
+            ms.setId(rs.getInt(1));
+            ms.setName(rs.getString(2));
+            ms.setQuantity(rs.getDouble(3));
+            ms.setPurchasePrice(rs.getDouble(4));
+            ms.setSellingPrice(rs.getDouble(5));
+            list.add(ms);
+        }
+        return list;
     }
 }
