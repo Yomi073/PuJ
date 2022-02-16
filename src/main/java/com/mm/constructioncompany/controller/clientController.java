@@ -265,8 +265,12 @@ public class clientController implements Initializable {
 
     @FXML
     void remove(MouseEvent event) {
-        clientsTbl.getSelectionModel().clearSelection();
-        removeSelection();
+        if(this.selectedClient!=null)
+        {
+            clientsTbl.getSelectionModel().clearSelection();
+            removeSelection();
+        }
+
     }
 
 }

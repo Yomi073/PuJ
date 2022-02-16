@@ -52,7 +52,7 @@ public class workerProfileController implements Initializable {
     void editProfile(MouseEvent event) throws Exception {
     String firstName=this.firstNameTxt.getText();
     String lastName=this.lastNameTxt.getText();
-    String address=this.lastNameTxt.getText();
+    String address=this.addressTxt.getText();
     String phoneNum=this.phoneNumTxt.getText();
     String email=this.emailTxt.getText();
     String userName=this.userNameTxt.getText();

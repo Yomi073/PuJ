@@ -64,7 +64,7 @@ public class userController implements Initializable {
     private TextField e_mailTxt;
 
     @FXML
-    private ComboBox<String> roleTxt;
+    private ComboBox roleTxt;
 
     @FXML
     private TextField userNameTxt;
@@ -169,8 +169,9 @@ public class userController implements Initializable {
         String email = this.e_mailTxt.getText();
         String userName = this.userNameTxt.getText();
         String adress = this.addressTxt.getText();
-        String roleName = this.roleTxt.getValue();
-        if (firstName.equals("")||lastName.equals("")||phoneNumb.equals("")||email.equals("")||userName.equals("")||adress.equals("")||roleName==null)
+        String roleName = String.valueOf(this.roleTxt.getValue());
+        String password=this.passwordTxt.getText();
+        if (firstName.equals("")||lastName.equals("")||phoneNumb.equals("")||email.equals("")||userName.equals("")||adress.equals("")|| password.equals("") ||roleName==null)
         {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter all fields!", ButtonType.OK);
             alert.setTitle("Warning");
@@ -211,6 +212,8 @@ public class userController implements Initializable {
                 }
                 else
                 {
+                    if(password.equals(passwordTxt.getText()))
+                        u.setPassword(password);
                     u.update();
                     this.fillUsers();
                     this.removeSelection();
@@ -316,8 +319,12 @@ public class userController implements Initializable {
     }
     @FXML
     void remove(MouseEvent event) {
-        usersTbl.getSelectionModel().clearSelection();
-        removeSelection();
+        if(this.selectedUser!=null)
+        {
+            usersTbl.getSelectionModel().clearSelection();
+            removeSelection();
+        }
+
     }
 
 }

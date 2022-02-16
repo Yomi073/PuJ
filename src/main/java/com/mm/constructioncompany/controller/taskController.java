@@ -302,8 +302,11 @@ public class taskController implements Initializable {
     }
     @FXML
     void remove(MouseEvent event) {
-        tasksTbl.getSelectionModel().clearSelection();
-        removeSelection();
+        if(this.selectedTask!=null)
+        {
+            tasksTbl.getSelectionModel().clearSelection();
+            removeSelection();
+        }
     }
 
 

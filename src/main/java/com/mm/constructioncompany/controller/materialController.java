@@ -254,7 +254,11 @@ public class materialController implements Initializable {
 
     @FXML
     void remove(MouseEvent event) {
-        materialsTbl.getSelectionModel().clearSelection();
-        removeSelection();
+        if(this.selectedMaterial!=null)
+        {
+            materialsTbl.getSelectionModel().clearSelection();
+            removeSelection();
+        }
+
     }
 }
