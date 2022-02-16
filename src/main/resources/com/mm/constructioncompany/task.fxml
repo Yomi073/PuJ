@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane minHeight="700.0" minWidth="700.0" onMouseClicked="#remove" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mm.constructioncompany.controller.taskController">
+   <children>
+      <fx:include source="sidebar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane layoutX="157.0" layoutY="100.0" prefHeight="200.0" style="-fx-background-color: #bfe1ff; -fx-border-color: lightgrey;" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+      <children>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tasks information:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0">
+            <font>
+               <Font size="16.0" />
+            </font>
+         </Text>
+         <Label alignment="CENTER" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Search the task" textAlignment="RIGHT" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="45.0">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
+         <TextField fx:id="searchTxt" prefHeight="30.0" prefWidth="310.0" promptText="Keywords..." style="-fx-background-color: white; -fx-background-radius: 50;" AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="45.0" />
+         <ComboBox fx:id="selectWorker" prefHeight="30.0" prefWidth="130.0" promptText="Select worker" stylesheets="@../../../Css/style.css" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="90.0">
+            <styleClass>
+               <String fx:value="list-view" />
+               <String fx:value="combo-box" />
+            </styleClass></ComboBox>
+         <ComboBox fx:id="selectClient" prefHeight="30.0" prefWidth="130.0" promptText="Select client" stylesheets="@../../../Css/style.css" AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="90.0">
+            <styleClass>
+               <String fx:value="list-view" />
+               <String fx:value="combo-box" />
+            </styleClass></ComboBox>
+         <DatePicker fx:id="datePick" prefHeight="30.0" prefWidth="180.0" promptText="Pick a date" stylesheets="@../../../Css/date-picker.css" AnchorPane.leftAnchor="275.0" AnchorPane.topAnchor="90.0">
+            <styleClass>
+               <String fx:value="arrow" />
+               <String fx:value="arrow-button" />
+               <String fx:value="button" />
+               <String fx:value="cell" />
+               <String fx:value="date-picker" />
+               <String fx:value="date-picker-popup" />
+               <String fx:value="label" />
+               <String fx:value="left-arrow" />
+               <String fx:value="month-year-pane" />
+               <String fx:value="right-arrow" />
+               <String fx:value="selected" />
+               <String fx:value="spinner" />
+               <String fx:value="week-number-cell" />
+            </styleClass></DatePicker>
+         <Button fx:id="btnPreview" mnemonicParsing="false" onAction="#onPreview" prefHeight="30.0" prefWidth="90.0" styleClass="info-button" stylesheets="@../../../Css/style.css" text="Preview" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="145.0">
+            <font>
+               <Font size="14.0" />
+            </font></Button>
+         <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#onDelete" prefHeight="30.0" prefWidth="90.0" styleClass="danger-button" stylesheets="@../../../Css/style.css" text="Delete" AnchorPane.leftAnchor="160.0" AnchorPane.topAnchor="145.0">
+            <font>
+               <Font size="14.0" />
+            </font></Button>
+         <Button fx:id="btnSave" mnemonicParsing="false" onAction="#onSave" prefHeight="30.0" prefWidth="90.0" styleClass="success-button" stylesheets="@../../../Css/style.css" text="Add task" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="145.0">
+            <font>
+               <Font size="14.0" />
+            </font></Button>
+         <Button fx:id="btnAddMaterial" mnemonicParsing="false" onAction="#onAddMaterial" prefHeight="30.0" prefWidth="115.0" styleClass="success-button" stylesheets="@../../../Css/style.css" text="Add material" AnchorPane.leftAnchor="340.0" AnchorPane.topAnchor="145.0">
+            <font>
+               <Font size="14.0" />
+            </font></Button>
+      </children>
+   </AnchorPane>
+      <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
+         <children>
+            <TableView fx:id="tasksTbl" layoutX="7.0" onMouseClicked="#selectTask" prefHeight="375.0" prefWidth="1043.0" style="-fx-background-color: #D3D3D3; -fx-border-color: lightgrey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <columns>
+                  <TableColumn fx:id="IDTblCol" minWidth="20.0" prefWidth="260.0" text="ID" />
+                  <TableColumn fx:id="workerTblCol" minWidth="20.0" prefWidth="260.0" style="-fx-alignment: center;" text="Worker " />
+                  <TableColumn fx:id="clientTblCol" prefWidth="260.0" style="-fx-alignment: center;" text="Client" />
+                  <TableColumn fx:id="dateTblCol" minWidth="20.0" prefWidth="261.0" style="-fx-alignment: center;" text="Date" />
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
