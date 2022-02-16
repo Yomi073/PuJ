@@ -85,7 +85,8 @@ public class Table {
                         .append("_").append(fieldName)
                         .append(" FOREIGN KEY (").append(fieldName)
                         .append(") REFERENCES ").append(refTableName).append("(")
-                        .append(refAttrName).append(")");
+                        .append(refAttrName).append(")")
+                        .append("ON DELETE CASCADE");
                 if (index < fields.length)
                     CREATE_SQL_QUERY.append(",");
                 CREATE_SQL_QUERY.append("\n");
@@ -212,10 +213,10 @@ public class Table {
         return list;
     }
 
-    public static List<tempTable> listTempTable(ResultSet rs) throws Exception {
-        List<tempTable> list = new ArrayList<>();
+    public static List<TempTable> listTempTable(ResultSet rs) throws Exception {
+        List<TempTable> list = new ArrayList<>();
         while(rs.next()){
-            tempTable tt = new tempTable();
+            TempTable tt = new TempTable();
             tt.setId(rs.getInt(1));
             tt.setName(rs.getString(2));
             tt.setQuantity(rs.getDouble(3));
@@ -225,32 +226,32 @@ public class Table {
         }
         return list;
     }
-/*
-    public static List<MaterialConsumption> listMaterialConsumption(ResultSet rs) throws Exception {
+
+    public static List<MaterialConsumption> materialConsumptions(ResultSet rs) throws Exception {
         List<MaterialConsumption> list = new ArrayList<>();
         while(rs.next()){
             MaterialConsumption mc = new MaterialConsumption();
-            mc.setQuantity(rs.getDouble(9));
-            mc.setMaterialStock_FK(rs.getInt(10));
-            mc.setTask_FK(rs.getInt(11));
+            mc.setId(rs.getInt(1));
+            mc.setMaterialStock_FK(rs.getInt(2));
+            mc.setTask_FK(rs.getInt(3));
+            mc.setQuantity(rs.getDouble(4));
+            list.add(mc);
+        }
+        return list;
+    }
+    public static List<WorkerView> WorkerTasks(ResultSet rs) throws Exception {
+        List<WorkerView> list = new ArrayList<>();
+        while(rs.next()){
+            WorkerView mc = new WorkerView();
+            mc.setTaskId(rs.getInt(1));
+            mc.setClientName(rs.getString(2));
+            mc.setClientAddress(rs.getString(3));
+            mc.setDate(rs.getString(4));
+            mc.setClientId(rs.getInt(5));
             list.add(mc);
         }
         return list;
     }
 
-
- */
-public static List<MaterialConsumption> materialConsumptions(ResultSet rs) throws Exception {
-    List<MaterialConsumption> list = new ArrayList<>();
-    while(rs.next()){
-        MaterialConsumption mc = new MaterialConsumption();
-        mc.setId(rs.getInt(1));
-        mc.setMaterialStock_FK(rs.getInt(2));
-        mc.setTask_FK(rs.getInt(3));
-        mc.setQuantity(rs.getDouble(4));
-        list.add(mc);
-    }
-    return list;
-}
 
 }

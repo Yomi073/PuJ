@@ -4,19 +4,19 @@ public class Client extends Table{
     @Entity(type = "INTEGER",size = 32,primary = true)
     int id;
 
-    @Entity(type = "VARCHAR",size = 25)
+    @Entity(type = "VARCHAR",size = 50)
     String firstName;
 
-    @Entity(type = "VARCHAR",size = 25)
+    @Entity(type = "VARCHAR",size = 50)
     String lastName;
 
-    @Entity(type = "VARCHAR",size = 25)
+    @Entity(type = "VARCHAR",size = 50)
     String address;
 
-    @Entity(type = "VARCHAR",size = 25)
+    @Entity(type = "VARCHAR",size = 50)
     String phoneNumber;
 
-    @Entity(type = "VARCHAR",size = 25)
+    @Entity(type = "VARCHAR",size = 50)
     String email;
 
     public int getId() {

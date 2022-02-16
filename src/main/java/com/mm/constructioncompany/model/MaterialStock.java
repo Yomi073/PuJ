@@ -4,7 +4,7 @@ public class MaterialStock extends Table{
     @Entity(type="INTEGER", size=32, primary = true)
     int id;
 
-    @Entity(type="VARCHAR", size=25)
+    @Entity(type="VARCHAR", size=50)
     String name;
 
     @Entity(type="DOUBLE",isnull = false)

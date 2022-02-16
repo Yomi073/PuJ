@@ -64,15 +64,35 @@ public class addMaterialController implements Initializable {
     void onDelete(ActionEvent event) {
         if (selectedMaterial != null) {
             try {
-                MaterialStock materialStock = (MaterialStock) this.selectMaterial.getValue();
-                Double quantity= Double.valueOf(quantityTxt.getText());
-                selectedMaterial.delete();
-                MaterialStock stockQuantityObject= (MaterialStock) Table.get(MaterialStock.class,materialStock.getId());
-                Double stockQuantity=stockQuantityObject.getQuantity();
-                stockQuantityObject.setQuantity(stockQuantity+quantity);
-                stockQuantityObject.update();
-                this.fillMaterialConsumption();
-                this.removeSelection();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Are you sure you want to delete material "+this.selectedMaterial.getId()+"?");
+                alert.setContentText("Delete?");
+                ButtonType okButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+                ButtonType noButton = new ButtonType("No", ButtonBar.ButtonData.NO);
+                alert.getButtonTypes().setAll(okButton, noButton);
+                alert.showAndWait().ifPresent(type -> {
+                    if (type == okButton)
+                    {
+                        try {
+                            MaterialStock materialStock = (MaterialStock) this.selectMaterial.getValue();
+                            Double quantity= Double.valueOf(quantityTxt.getText());
+                            selectedMaterial.delete();
+                            MaterialStock stockQuantityObject= (MaterialStock) Table.get(MaterialStock.class,materialStock.getId());
+                            Double stockQuantity=stockQuantityObject.getQuantity();
+                            stockQuantityObject.setQuantity(stockQuantity+quantity);
+                            stockQuantityObject.update();
+                            this.fillMaterialConsumption();
+                            this.removeSelection();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else
+                    {
+                        alert.close();
+                    }
+                });
+
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -120,8 +140,16 @@ public class addMaterialController implements Initializable {
                             mc.save();
                             stockQuantityObject.setQuantity(stockQuantity-Double.valueOf(quantityTxt.getText()));
                             stockQuantityObject.update();
+
+
                             this.fillMaterialConsumption();
                             this.removeSelection();
+
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Material added succesfully", ButtonType.OK);
+                            alert.setTitle("Information");
+                            alert.setHeaderText("Success!");
+                            alert.showAndWait();
+
                         }
                     } else {
                             if(Double.valueOf(quantityTxt.getText())>this.selectedMaterial.getQuantity())
@@ -140,6 +168,11 @@ public class addMaterialController implements Initializable {
                                     mc.setTask_FK(selectedTask.getId());
                                     mc.setMaterialStock_FK(materialStock.getId());
                                     mc.update();
+
+                                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Material edited succesfully", ButtonType.OK);
+                                    alert.setTitle("Information");
+                                    alert.setHeaderText("Success!");
+                                    alert.showAndWait();
                                 }
 
                             }
@@ -151,10 +184,16 @@ public class addMaterialController implements Initializable {
                                 mc.setTask_FK(selectedTask.getId());
                                 mc.setMaterialStock_FK(materialStock.getId());
                                 mc.update();
-                            }
 
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Material edited succesfully", ButtonType.OK);
+                                alert.setTitle("Information");
+                                alert.setHeaderText("Success!");
+                                alert.showAndWait();
+                            }
                             this.fillMaterialConsumption();
                             this.removeSelection();
+
+
                         }
 
                     fillMaterialConsumption();
@@ -223,24 +262,37 @@ public class addMaterialController implements Initializable {
     }
 
     @FXML
-    public void selectMaterial(MouseEvent evt) throws Exception {
-        this.selectedMaterial = (MaterialConsumption) this.materialsTbl.getSelectionModel().getSelectedItem();
-        this.btnAdd.setText("Edit");
-        this.quantityTxt.setText(String.valueOf(this.selectedMaterial.getQuantity()));
-        this.selectMaterial.setValue(this.selectedMaterial.getMaterialStock());
-    }
+    public void selectMaterial(MouseEvent evt) throws Exception
+    {
+        try {
+            this.selectedMaterial = (MaterialConsumption) this.materialsTbl.getSelectionModel().getSelectedItem();
+            if(selectedMaterial!=null)
+            {
+                this.btnAdd.setText("Edit");
+                this.selectMaterial.setDisable(true);
+                this.quantityTxt.setText(String.valueOf(this.selectedMaterial.getQuantity()));
+                this.selectMaterial.setValue(this.selectedMaterial.getMaterialStock());
+            }
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
 
+
+    }
     public void setSelectedTask(Task t)
     {
-        this.selectedTask=t;
+            this.selectedTask=t;
     }
 
     @FXML
     protected void removeSelection() {
         this.selectedMaterial = null;
+        this.selectMaterial.setDisable(false);
         this.btnAdd.setText("Add");
         this.selectMaterial.valueProperty().set(null);
         this.quantityTxt.setText("");
+
     }
     public ResultSet makeSelectQuery() throws SQLException {
         String SQL = "SELECT MaterialConsumption.id,MaterialConsumption.materialStock_FK,MaterialConsumption.task_FK,MaterialConsumption.quantity FROM Task LEFT JOIN MaterialConsumption ON Task.id = MaterialConsumption.task_FK LEFT JOIN MaterialStock ON MaterialConsumption.materialStock_FK = MaterialStock.id WHERE Task.id="+this.selectedTask.getId();
@@ -249,6 +301,11 @@ public class addMaterialController implements Initializable {
         return rs;
     }
 
+    @FXML
+    void remove(MouseEvent event) {
+        materialsTbl.getSelectionModel().clearSelection();
+        removeSelection();
+    }
 
 
 

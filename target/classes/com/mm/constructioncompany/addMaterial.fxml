@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="350.0" prefWidth="550.0" style="-fx-background-color: #bfe1ff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mm.constructioncompany.controller.addMaterialController">
+<AnchorPane onMouseClicked="#remove" prefHeight="350.0" prefWidth="550.0" style="-fx-background-color: #bfe1ff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mm.constructioncompany.controller.addMaterialController">
    <children>
       <TextField fx:id="quantityTxt" layoutX="43.0" layoutY="66.0" prefHeight="20.0" prefWidth="150.0" promptText="Quantity" styleClass="text-field" stylesheets="@../../../Css/style.css" AnchorPane.leftAnchor="43.0" AnchorPane.topAnchor="66.0" />
       <Button fx:id="btnAdd" layoutX="289.0" layoutY="65.0" mnemonicParsing="false" onAction="#onSave" prefHeight="25.0" prefWidth="80.0" styleClass="success-button" stylesheets="@../../../Css/style.css" text="Add" AnchorPane.leftAnchor="289.0" AnchorPane.topAnchor="65.0">

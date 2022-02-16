@@ -62,9 +62,29 @@ public class materialController implements Initializable {
     void onDelete(ActionEvent event) {
         if (selectedMaterial != null){
             try {
-                selectedMaterial.delete();
-                this.fillMaterials();
-                this.removeSelection();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Are you sure you want to delete material "+this.selectedMaterial.getName()+"?");
+                alert.setContentText("Delete?");
+                ButtonType okButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+                ButtonType noButton = new ButtonType("No", ButtonBar.ButtonData.NO);
+                alert.getButtonTypes().setAll(okButton, noButton);
+                alert.showAndWait().ifPresent(type -> {
+                    if (type == okButton)
+                    {
+                        try {
+                            selectedMaterial.delete();
+                            this.fillMaterials();
+                            this.removeSelection();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else
+                    {
+                        alert.close();
+                    }
+                });
+
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -78,9 +98,9 @@ public class materialController implements Initializable {
         String purchasePrice = this.purchasePriceTxt.getText();
         String sellingPrice = this.sellingPriceTxt.getText();
 
-        if (name.equals("")||purchasePrice.equals("")||sellingPrice.equals("") || quantity==null || !isNumeric(quantity))
+        if (name.equals("")|| purchasePrice.equals("")|| sellingPrice.equals("") || quantity==null || !isNumeric(sellingPrice) || !isNumeric(purchasePrice)  || !isNumeric(quantity))
         {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "All fields are mandatory and quantity must be a number", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.WARNING, "All fields are mandatory!Quantity,selling and purchase price must be a number", ButtonType.OK);
             alert.setTitle("Warning");
             alert.setHeaderText("Input error!");
             alert.showAndWait();
@@ -102,14 +122,21 @@ public class materialController implements Initializable {
                     m.save();
                     this.fillMaterials();
                     this.removeSelection();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "New material added succesfully", ButtonType.OK);
+                    alert.setTitle("Information");
+                    alert.setHeaderText("Success!");
+                    alert.showAndWait();
                 }
                 else
                 {
                     m.update();
                     this.fillMaterials();
                     this.removeSelection();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Material edited succesfully", ButtonType.OK);
+                    alert.setTitle("Information");
+                    alert.setHeaderText("Success!");
+                    alert.showAndWait();
                 }
-
                 fillMaterials();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -184,12 +211,14 @@ public class materialController implements Initializable {
     @FXML
     public void selectMaterial(MouseEvent evt){
         this.selectedMaterial = (MaterialStock) this.materialsTbl.getSelectionModel().getSelectedItem();
-        this.btnAdd.setText("Edit");
-        this.nameTxt.setText(this.selectedMaterial.getName());
-        this.quantityTxt.setText(String.valueOf(this.selectedMaterial.getQuantity()));
-        this.sellingPriceTxt.setText(String.valueOf(this.selectedMaterial.getSellingPrice()));
-        this.purchasePriceTxt.setText(String.valueOf(this.selectedMaterial.getPurchasePrice()));
-
+        if(this.selectedMaterial!=null)
+        {
+            this.btnAdd.setText("Edit");
+            this.nameTxt.setText(this.selectedMaterial.getName());
+            this.quantityTxt.setText(String.valueOf(this.selectedMaterial.getQuantity()));
+            this.sellingPriceTxt.setText(String.valueOf(this.selectedMaterial.getSellingPrice()));
+            this.purchasePriceTxt.setText(String.valueOf(this.selectedMaterial.getPurchasePrice()));
+        }
     }
 
 
@@ -221,5 +250,11 @@ public class materialController implements Initializable {
             return false;
         }
         return true;
+    }
+
+    @FXML
+    void remove(MouseEvent event) {
+        materialsTbl.getSelectionModel().clearSelection();
+        removeSelection();
     }
 }

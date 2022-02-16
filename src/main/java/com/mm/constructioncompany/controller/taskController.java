@@ -72,9 +72,28 @@ public class taskController implements Initializable {
 
         if (selectedTask != null) {
             try {
-                selectedTask.delete();
-                this.fillTasks();
-                this.removeSelection();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Are you sure you want to delete task "+this.selectedTask.getId()+"?");
+                alert.setContentText("Delete?");
+                ButtonType okButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+                ButtonType noButton = new ButtonType("No", ButtonBar.ButtonData.NO);
+                alert.getButtonTypes().setAll(okButton, noButton);
+                alert.showAndWait().ifPresent(type -> {
+                    if (type == okButton)
+                    {
+                        try {
+                            selectedTask.delete();
+                            this.fillTasks();
+                            this.removeSelection();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else
+                    {
+                        alert.close();
+                    }
+                });
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -113,10 +132,18 @@ public class taskController implements Initializable {
                     t.save();
                     this.fillTasks();
                     this.removeSelection();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "New task added succesfully", ButtonType.OK);
+                    alert.setTitle("Information");
+                    alert.setHeaderText("Success!");
+                    alert.showAndWait();
                 } else {
                     t.update();
                     this.fillTasks();
                     this.removeSelection();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Task edited succesfully", ButtonType.OK);
+                    alert.setTitle("Information");
+                    alert.setHeaderText("Success!");
+                    alert.showAndWait();
                 }
                 fillTasks();
             } catch (Exception e) {
@@ -204,7 +231,7 @@ public class taskController implements Initializable {
         this.fillTasks();
         this.selectWorker.valueProperty().set(null);
         this.selectClient.valueProperty().set(null);
-        this.btnSave.setText("Add");
+        this.btnSave.setText("Add task");
         this.datePick.setValue(null);
         this.btnPreview.setDisable(true);
         this.btnAddMaterial.setDisable(true);
@@ -213,12 +240,16 @@ public class taskController implements Initializable {
     @FXML
     public void selectTask(MouseEvent evt) throws Exception {
         this.selectedTask = (Task) this.tasksTbl.getSelectionModel().getSelectedItem();
-        this.btnSave.setText("Edit");
-        this.selectClient.setValue(this.selectedTask.getClient());
-        this.selectWorker.setValue(this.selectedTask.getUser());
-        this.datePick.setValue(this.selectedTask.getDate().toLocalDate());
-        this.btnPreview.setDisable(false);
-        this.btnAddMaterial.setDisable(false);
+        if(selectedTask!=null)
+        {
+            this.btnSave.setText("Edit");
+            this.selectClient.setValue(this.selectedTask.getClient());
+            this.selectWorker.setValue(this.selectedTask.getUser());
+            this.datePick.setValue(this.selectedTask.getDate().toLocalDate());
+            this.btnPreview.setDisable(false);
+            this.btnAddMaterial.setDisable(false);
+        }
+
     }
 
     public void onPreview() throws Exception {
@@ -269,7 +300,11 @@ public class taskController implements Initializable {
         }
         return FXCollections.observableList(filteredList);
     }
-
+    @FXML
+    void remove(MouseEvent event) {
+        tasksTbl.getSelectionModel().clearSelection();
+        removeSelection();
+    }
 
 
 }

@@ -1,11 +1,8 @@
 package com.mm.constructioncompany.model;
 
-
-
 import java.sql.Time;
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.LocalDate;
+
 
 
 public class Task extends Table{

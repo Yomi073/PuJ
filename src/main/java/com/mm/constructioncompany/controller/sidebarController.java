@@ -8,11 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 
-public class sidebarController {
+public class sidebarController implements Initializable{
 
     @FXML
     protected static Label loggedUserLbl;
@@ -50,4 +49,8 @@ public class sidebarController {
         Main.showWindow("login.fxml","Welcome to the login", 1200, 400);
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }

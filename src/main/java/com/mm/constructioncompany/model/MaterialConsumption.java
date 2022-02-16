@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class MaterialConsumption extends Table{
     @Entity(type = "INTEGER",size=32,primary = true)

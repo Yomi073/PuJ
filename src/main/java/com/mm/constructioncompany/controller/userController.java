@@ -2,38 +2,20 @@ package com.mm.constructioncompany.controller;
 
 
 import com.mm.constructioncompany.model.*;
-import javafx.beans.Observable;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.Locale;
 import java.util.ResourceBundle;
-
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
 import java.util.ArrayList;
-import java.sql.SQLException;
-
-import javafx.scene.control.cell.PropertyValueFactory;
-
-import static java.util.Collections.addAll;
-
 public class userController implements Initializable {
 
     @FXML
@@ -222,14 +204,21 @@ public class userController implements Initializable {
                     u.save();
                     this.fillUsers();
                     this.removeSelection();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "New user added succesfully", ButtonType.OK);
+                    alert.setTitle("Information");
+                    alert.setHeaderText("Success!");
+                    alert.showAndWait();
                 }
                 else
                 {
                     u.update();
                     this.fillUsers();
                     this.removeSelection();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "User edited succesfully", ButtonType.OK);
+                    alert.setTitle("Information");
+                    alert.setHeaderText("Success!");
+                    alert.showAndWait();
                 }
-
                 fillUsers();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -240,18 +229,21 @@ public class userController implements Initializable {
     @FXML
     public void selectUser(MouseEvent evt){
         this.selectedUser = (User) this.usersTbl.getSelectionModel().getSelectedItem();
-        this.btnSave.setText("Edit");
-        this.nameTxt.setText(this.selectedUser.getFirstName());
-        this.surnameTxt.setText(this.selectedUser.getLastName());
-        this.addressTxt.setText(this.selectedUser.getAddress());
-        this.mobilePhoneTxt.setText(this.selectedUser.getPhoneNumber());
-        this.e_mailTxt.setText(this.selectedUser.getEmail());
-        this.userNameTxt.setText(this.selectedUser.getUserName());
-        this.passwordTxt.setText(this.selectedUser.getPassword());
-        try {
-            this.roleTxt.setValue(this.selectedUser.getRole().getName().toString());
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(selectedUser!=null)
+        {
+            this.btnSave.setText("Edit");
+            this.nameTxt.setText(this.selectedUser.getFirstName());
+            this.surnameTxt.setText(this.selectedUser.getLastName());
+            this.addressTxt.setText(this.selectedUser.getAddress());
+            this.mobilePhoneTxt.setText(this.selectedUser.getPhoneNumber());
+            this.e_mailTxt.setText(this.selectedUser.getEmail());
+            this.userNameTxt.setText(this.selectedUser.getUserName());
+            this.passwordTxt.setText(this.selectedUser.getPassword());
+            try {
+                this.roleTxt.setValue(this.selectedUser.getRole().getName().toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -275,9 +267,28 @@ public class userController implements Initializable {
     {
         if (selectedUser != null){
             try {
-                selectedUser.delete();
-                this.fillUsers();
-                this.removeSelection();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Are you sure you want to delete user "+this.selectedUser.getFirstName()+"?");
+                alert.setContentText("Delete?");
+                ButtonType okButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+                ButtonType noButton = new ButtonType("No", ButtonBar.ButtonData.NO);
+                alert.getButtonTypes().setAll(okButton, noButton);
+                alert.showAndWait().ifPresent(type -> {
+                    if (type == okButton)
+                    {
+                        try {
+                            selectedUser.delete();
+                            this.fillUsers();
+                            this.removeSelection();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else
+                    {
+                        alert.close();
+                    }
+                });
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -302,6 +313,11 @@ public class userController implements Initializable {
                 filteredList.add(user);
         }
         return FXCollections.observableList(filteredList);
+    }
+    @FXML
+    void remove(MouseEvent event) {
+        usersTbl.getSelectionModel().clearSelection();
+        removeSelection();
     }
 
 }

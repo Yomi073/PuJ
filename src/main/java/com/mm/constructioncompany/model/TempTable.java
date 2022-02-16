@@ -1,11 +1,6 @@
 package com.mm.constructioncompany.model;
 
-import java.lang.reflect.Field;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
-public class tempTable extends Table{
+public class TempTable extends Table{
 
     private int id;
     private String name;

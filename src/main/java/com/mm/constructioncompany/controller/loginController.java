@@ -83,8 +83,10 @@ public class loginController implements Initializable {
                         title="Welcome "+loggedUser.getUserName();
 
                     }
-
-                    Main.showWindow(view,title, 1200, 740);
+                    if(view.equals("adminView.fxml"))
+                        Main.showWindow(view,title, 1200, 740);
+                    else
+                        Main.showWindow(view,title, 900, 700);
 
                 } else {
                     Alert alert = new Alert(Alert.AlertType.WARNING, "Entered data doesn't exist in database!!", ButtonType.OK);

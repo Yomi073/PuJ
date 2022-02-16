@@ -1,9 +1,7 @@
 package com.mm.constructioncompany.controller;
 
 import com.mm.constructioncompany.model.Client;
-import com.mm.constructioncompany.model.CryptMD5;
 import com.mm.constructioncompany.model.Table;
-import com.mm.constructioncompany.model.User;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -133,9 +131,28 @@ public class clientController implements Initializable {
     void onDelete(ActionEvent event) {
         if (selectedClient != null){
             try {
-                selectedClient.delete();
-                this.fillClients();
-                this.removeSelection();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Are you sure you want to delete client "+this.selectedClient.getFirstName()+"?");
+                alert.setContentText("Delete?");
+                ButtonType okButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+                ButtonType noButton = new ButtonType("No", ButtonBar.ButtonData.NO);
+                alert.getButtonTypes().setAll(okButton, noButton);
+                alert.showAndWait().ifPresent(type -> {
+                    if (type == okButton)
+                    {
+                        try {
+                            selectedClient.delete();
+                            this.fillClients();
+                            this.removeSelection();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else
+                    {
+                        alert.close();
+                    }
+                });
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -178,12 +195,20 @@ public class clientController implements Initializable {
                     c.save();
                     this.fillClients();
                     this.removeSelection();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "New client added succesfully", ButtonType.OK);
+                    alert.setTitle("Information");
+                    alert.setHeaderText("Success!");
+                    alert.showAndWait();
                 }
                 else
                 {
                     c.update();
                     this.fillClients();
                     this.removeSelection();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Client edited succesfully", ButtonType.OK);
+                    alert.setTitle("Information");
+                    alert.setHeaderText("Success!");
+                    alert.showAndWait();
                 }
 
                 fillClients();
@@ -196,12 +221,16 @@ public class clientController implements Initializable {
     @FXML
     public void selectClient(MouseEvent evt){
         this.selectedClient = (Client) this.clientsTbl.getSelectionModel().getSelectedItem();
-        this.btnAdd.setText("Edit");
-        this.nameTxt.setText(this.selectedClient.getFirstName());
-        this.surnameTxt.setText(this.selectedClient.getLastName());
-        this.addressTxt.setText(this.selectedClient.getAdress());
-        this.mobilePhoneTxt.setText(this.selectedClient.getPhoneNumber());
-        this.e_mailTxt.setText(this.selectedClient.getEmail());
+        if(selectedClient!=null)
+        {
+
+            this.btnAdd.setText("Edit");
+            this.nameTxt.setText(this.selectedClient.getFirstName());
+            this.surnameTxt.setText(this.selectedClient.getLastName());
+            this.addressTxt.setText(this.selectedClient.getAdress());
+            this.mobilePhoneTxt.setText(this.selectedClient.getPhoneNumber());
+            this.e_mailTxt.setText(this.selectedClient.getEmail());
+        }
     }
 
     @FXML
@@ -232,6 +261,12 @@ public class clientController implements Initializable {
                 filteredList.add(client);
         }
         return FXCollections.observableList(filteredList);
+    }
+
+    @FXML
+    void remove(MouseEvent event) {
+        clientsTbl.getSelectionModel().clearSelection();
+        removeSelection();
     }
 
 }
