@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class taskController implements Initializable {
+public class TaskController implements Initializable {
 
 
     @FXML
@@ -68,7 +68,7 @@ public class taskController implements Initializable {
 
 
     @FXML
-    void onDelete(ActionEvent event) {
+    public void onDelete(ActionEvent event) {
 
         if (selectedTask != null) {
             try {
@@ -101,7 +101,7 @@ public class taskController implements Initializable {
     }
 
     @FXML
-    void onSave(ActionEvent event) {
+    public void onSave(ActionEvent event) {
         boolean isSelectWorkerEmpty =(this.selectWorker.getValue() == null);
         boolean isSelectClientEmpty =(this.selectClient.getValue() == null);
 
@@ -258,7 +258,7 @@ public class taskController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(Main.class.getResource("invoice.fxml"));
             Parent root = fxmlLoader.load();
-            invoiceController incont = fxmlLoader.getController();
+            InvoiceController incont = fxmlLoader.getController();
             incont.setSelectedTask(selectedTask);
             incont.initController();
             Stage stage = new Stage();
@@ -273,9 +273,9 @@ public class taskController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(Main.class.getResource("addMaterial.fxml"));
             Parent root = fxmlLoader.load();
-            addMaterialController addMaterialController = fxmlLoader.getController();
+            AddMaterialController addMaterialController = fxmlLoader.getController();
             addMaterialController.setSelectedTask(this.selectedTask);
-            addMaterialController.initController();
+            addMaterialController.fillMaterialConsumption();
             Stage stage = new Stage();
             stage.setTitle("Set material");
             stage.setScene(new Scene(root));
@@ -300,6 +300,7 @@ public class taskController implements Initializable {
         }
         return FXCollections.observableList(filteredList);
     }
+
     @FXML
     void remove(MouseEvent event) {
         if(this.selectedTask!=null)

@@ -80,10 +80,7 @@ public class Task extends Table{
         User_FK = user_FK;
     }
 
-    public Client getClient()throws Exception
-    {
-        return (Client) Table.get(Client.class,Client_FK);
-    }
+    public Client getClient()throws Exception { return (Client) Table.get(Client.class,Client_FK); }
 
     public void setClient_FK(int client_FK) {
         Client_FK = client_FK;

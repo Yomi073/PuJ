@@ -19,7 +19,7 @@ import java.sql.*;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class addMaterialController implements Initializable {
+public class AddMaterialController implements Initializable {
 
 
     @FXML
@@ -49,19 +49,19 @@ public class addMaterialController implements Initializable {
     @FXML
     private TableColumn idTblCol;
 
-    MaterialConsumption selectedMaterial=null;
+    private MaterialConsumption selectedMaterial=null;
 
-    Task selectedTask=null;
+    private Task selectedTask=null;
 
 
     @FXML
-    void closeWindow(ActionEvent event) {
+    public void closeWindow(ActionEvent event) {
         Stage stage = (Stage) btnClose.getScene().getWindow();
         stage.close();
     }
 
     @FXML
-    void onDelete(ActionEvent event) {
+    public void onDelete(ActionEvent event) {
         if (selectedMaterial != null) {
             try {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -246,7 +246,7 @@ public class addMaterialController implements Initializable {
         }
     }
 
-    private void fillMaterialConsumption()
+    public void fillMaterialConsumption()
     {
         try {
             List<MaterialConsumption> materialConsumptions = Table.materialConsumptions(makeSelectQuery());
@@ -255,10 +255,6 @@ public class addMaterialController implements Initializable {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }
-    public void initController()
-    {
-        fillMaterialConsumption();
     }
 
     @FXML
@@ -282,7 +278,7 @@ public class addMaterialController implements Initializable {
     }
     public void setSelectedTask(Task t)
     {
-            this.selectedTask=t;
+        this.selectedTask=t;
     }
 
     @FXML
@@ -292,8 +288,8 @@ public class addMaterialController implements Initializable {
         this.btnAdd.setText("Add");
         this.selectMaterial.valueProperty().set(null);
         this.quantityTxt.setText("");
-
     }
+
     public ResultSet makeSelectQuery() throws SQLException {
         String SQL = "SELECT MaterialConsumption.id,MaterialConsumption.materialStock_FK,MaterialConsumption.task_FK,MaterialConsumption.quantity FROM Task LEFT JOIN MaterialConsumption ON Task.id = MaterialConsumption.task_FK LEFT JOIN MaterialStock ON MaterialConsumption.materialStock_FK = MaterialStock.id WHERE Task.id="+this.selectedTask.getId();
         Statement stmt = DatabaseConnection.CONNECTION.createStatement();
@@ -302,7 +298,7 @@ public class addMaterialController implements Initializable {
     }
 
     @FXML
-    void remove(MouseEvent event) {
+    public void remove(MouseEvent event) {
         if(this.selectedMaterial!=null)
         {
             materialsTbl.getSelectionModel().clearSelection();

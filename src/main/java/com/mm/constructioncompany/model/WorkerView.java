@@ -1,18 +1,9 @@
 package com.mm.constructioncompany.model;
 
-
 public class WorkerView {
+
     private int taskId;
     private int clientId;
-
-    public int getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
-    }
-
     private String clientName;
     private String clientAddress;
     private String date;
@@ -23,6 +14,14 @@ public class WorkerView {
 
     public void setTaskId(int taskId) {
         this.taskId = taskId;
+    }
+
+    public int getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 
     public String getClientName() {
@@ -48,4 +47,5 @@ public class WorkerView {
     public void setDate(String date) {
         this.date = date;
     }
+
 }

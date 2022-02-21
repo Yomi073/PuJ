@@ -55,20 +55,4 @@ public class MaterialConsumption extends Table{
         return task_FK;
     }
 
-    public ArrayList<MaterialStock> list() throws SQLException {
-        String SQL = "SELECT MaterialStock.id,MaterialStock.name,MaterialStock.quantity,MaterialStock.purchasePrice,MaterialStock.sellingPrice FROM MaterialStock LEFT JOIN MaterialConsumption ON "+this.materialStock_FK+"=MaterialConsumption.materialStock_FK";
-        Statement stmt = DatabaseConnection.CONNECTION.createStatement();
-        ResultSet rs = stmt.executeQuery(SQL);
-        ArrayList<MaterialStock> list = new ArrayList<>();
-        while(rs.next()){
-            MaterialStock ms = new MaterialStock();
-            ms.setId(rs.getInt(1));
-            ms.setName(rs.getString(2));
-            ms.setQuantity(rs.getDouble(3));
-            ms.setPurchasePrice(rs.getDouble(4));
-            ms.setSellingPrice(rs.getDouble(5));
-            list.add(ms);
-        }
-        return list;
-    }
 }

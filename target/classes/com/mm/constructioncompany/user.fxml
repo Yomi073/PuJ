@@ -11,52 +11,50 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane onMouseClicked="#remove" prefHeight="800.0" prefWidth="1177.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mm.constructioncompany.controller.userController">
+<AnchorPane minHeight="700.0" minWidth="1000.0" onMouseClicked="#remove" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mm.constructioncompany.controller.UserController">
     <children>
-        <fx:include source="sidebar.fxml" />
-    </children>
-    <children>
-      <AnchorPane layoutX="150.0" layoutY="100.0" prefHeight="200.0" style="-fx-background-color: #bfe1ff; -fx-border-color: lightgrey;" AnchorPane.leftAnchor="157.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+    <fx:include source="sidebar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane prefHeight="200.0" style="-fx-background-color: #bfe1ff; -fx-border-color: lightgrey;" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
          <children>
-              <TextField fx:id="nameTxt" layoutY="100.0" minHeight="30.0" prefHeight="30.0" prefWidth="100.0" promptText="Name" styleClass="text-field" stylesheets="@../../../Css/style.css" />
-              <TextField fx:id="surnameTxt" layoutX="100.0" layoutY="100.0" minHeight="30.0" prefWidth="100.0" promptText="Surname" styleClass="text-field" stylesheets="@../../../Css/style.css" />
-              <TextField fx:id="addressTxt" layoutX="200.0" layoutY="100.0" minHeight="30.0" prefWidth="100.0" promptText="Address" stylesheets="@../../../Css/style.css" />
-              <TextField fx:id="mobilePhoneTxt" layoutX="300.0" layoutY="100.0" minHeight="30.0" prefWidth="100.0" promptText="Mobile Phone" stylesheets="@../../../Css/style.css" />
-              <TextField fx:id="e_mailTxt" layoutX="400.0" layoutY="100.0" minHeight="30.0" prefWidth="100.0" promptText="E_mail" stylesheets="@../../../Css/style.css" />
-              <Text layoutX="10.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Users information:">
+              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Users information:" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0">
                   <font>
                       <Font size="16.0" />
                   </font>
               </Text>
-                <Button fx:id="btnSave" layoutX="720.0" layoutY="158.0" minHeight="25.0" mnemonicParsing="false" onAction="#onSave" prefWidth="80.0" styleClass="success-button" stylesheets="@../../../Css/style.css" text="Add">
-               <font>
-                  <Font size="14.0" />
-               </font></Button>
-                <Button fx:id="btnDelete" layoutX="640.0" layoutY="158.0" minHeight="25.0" mnemonicParsing="false" onAction="#onDelete" prefWidth="80.0" styleClass="danger-button" stylesheets="@../../../Css/style.css" text="Delete">
-               <font>
-                  <Font size="14.0" />
-               </font></Button>
-            <TextField fx:id="userNameTxt" layoutX="500.0" layoutY="100.0" minHeight="30.0" prefWidth="100.0" promptText="Username" stylesheets="@../../../Css/style.css" />
-            <TextField fx:id="passwordTxt" layoutX="600.0" layoutY="100.0" minHeight="30.0" prefWidth="100.0" promptText="Password" stylesheets="@../../../Css/style.css" />
-            <TextField fx:id="searchTxt" layoutX="143.0" layoutY="52.0" prefHeight="30.0" prefWidth="651.0" promptText="Keywords...">
-               <font>
-                  <Font size="14.0" />
-               </font></TextField>
-            <ComboBox fx:id="roleTxt" layoutX="700.0" layoutY="100.0" minHeight="30.0" prefWidth="100.0" promptText="Select role" stylesheets="@../../../Css/style.css">
-               <styleClass>
-                  <String fx:value="combo-box" />
-                  <String fx:value="list-view" />
-               </styleClass></ComboBox>
-            <Label alignment="CENTER" layoutX="10.0" layoutY="52.0" prefHeight="30.0" prefWidth="129.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Search a user" textAlignment="RIGHT">
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Search a user" textAlignment="RIGHT" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="45.0">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
+            <TextField fx:id="searchTxt" prefHeight="30.0" prefWidth="670.0" promptText="Keywords..." AnchorPane.leftAnchor="145.0" AnchorPane.topAnchor="45.0">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+              <TextField fx:id="nameTxt" prefHeight="30.0" prefWidth="100.0" promptText="Name" styleClass="text-field" stylesheets="@../../../Css/style.css" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="90.0" />
+              <TextField fx:id="surnameTxt" prefHeight="30.0" prefWidth="100.0" promptText="Surname" styleClass="text-field" stylesheets="@../../../Css/style.css" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="90.0" />
+              <TextField fx:id="addressTxt" prefHeight="30.0" prefWidth="100.0" promptText="Address" stylesheets="@../../../Css/style.css" AnchorPane.leftAnchor="215.0" AnchorPane.topAnchor="90.0" />
+              <TextField fx:id="mobilePhoneTxt" prefHeight="30.0" prefWidth="100.0" promptText="Mobile Phone" stylesheets="@../../../Css/style.css" AnchorPane.leftAnchor="315.0" AnchorPane.topAnchor="90.0" />
+              <TextField fx:id="e_mailTxt" prefHeight="30.0" prefWidth="100.0" promptText="E_mail" stylesheets="@../../../Css/style.css" AnchorPane.leftAnchor="415.0" AnchorPane.topAnchor="90.0" />
+            <TextField fx:id="userNameTxt" prefHeight="30.0" prefWidth="100.0" promptText="Username" stylesheets="@../../../Css/style.css" AnchorPane.leftAnchor="515.0" AnchorPane.topAnchor="90.0" />
+            <TextField fx:id="passwordTxt" prefHeight="30.0" prefWidth="100.0" promptText="Password" stylesheets="@../../../Css/style.css" AnchorPane.leftAnchor="615.0" AnchorPane.topAnchor="90.0" />
+            <ComboBox fx:id="roleTxt" prefHeight="30.0" prefWidth="100.0" promptText="Select role" stylesheets="@../../../Css/style.css" AnchorPane.leftAnchor="715.0" AnchorPane.topAnchor="90.0">
+               <styleClass>
+                  <String fx:value="combo-box" />
+                  <String fx:value="list-view" />
+               </styleClass></ComboBox>
+                <Button fx:id="btnSave" mnemonicParsing="false" onAction="#onSave" prefHeight="30.0" prefWidth="90.0" styleClass="success-button" stylesheets="@../../../Css/style.css" text="Add" AnchorPane.leftAnchor="725.0" AnchorPane.topAnchor="145.0">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+                <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#onDelete" prefHeight="30.0" prefWidth="90.0" styleClass="danger-button" stylesheets="@../../../Css/style.css" text="Delete" AnchorPane.leftAnchor="635.0" AnchorPane.topAnchor="145.0">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
+      <AnchorPane prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="300.0">
          <children>
-              <TableView fx:id="usersTbl" onMouseClicked="#selectUser" style="-fx-background-color: #D3D3D3; -fx-border-color: lightgrey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <TableView fx:id="usersTbl" onMouseClicked="#selectUser" style="-fx-background-color: #D3D3D3; -fx-border-color: lightgrey;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <columns>
                       <TableColumn fx:id="IDTblCol" minWidth="20.0" prefWidth="116.66" text="ID" />
                       <TableColumn fx:id="nameTblCol" minWidth="20.0" prefWidth="116.66" style="-fx-alignment: center;" text="Name" />

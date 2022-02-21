@@ -11,12 +11,15 @@ import javafx.scene.control.*;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import java.util.List;
 import java.util.ArrayList;
-public class userController implements Initializable {
+public class UserController implements Initializable {
 
     @FXML
     private TableView usersTbl;
@@ -78,10 +81,9 @@ public class userController implements Initializable {
     @FXML
     private TextField searchTxt;
 
-    User selectedUser=null;
+    private User selectedUser=null;
 
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> rolesList = FXCollections.observableArrayList();
         rolesList.addAll( "Admin", "Worker");
         this.roleTxt.setItems(rolesList);
@@ -150,7 +152,7 @@ public class userController implements Initializable {
         }
     }
 
-    private void fillUsers(){
+    private void fillUsers() {
         try {
             List<?> usersList = Table.list(User.class);
             ObservableList<?> usersObservableList = FXCollections.observableList(usersList);
@@ -161,17 +163,17 @@ public class userController implements Initializable {
     }
 
     @FXML
-    public void onSave (ActionEvent evt){
+    public void onSave (ActionEvent evt) {
 
         String firstName = this.userNameTxt.getText();
         String lastName = this.surnameTxt.getText();
         String phoneNumb = this.mobilePhoneTxt.getText();
         String email = this.e_mailTxt.getText();
         String userName = this.userNameTxt.getText();
-        String adress = this.addressTxt.getText();
+        String address = this.addressTxt.getText();
         String roleName = String.valueOf(this.roleTxt.getValue());
-        String password=this.passwordTxt.getText();
-        if (firstName.equals("")||lastName.equals("")||phoneNumb.equals("")||email.equals("")||userName.equals("")||adress.equals("")|| password.equals("") ||roleName==null)
+        String password = this.passwordTxt.getText();
+        if (firstName.equals("")||lastName.equals("")||phoneNumb.equals("")||email.equals("")||userName.equals("")||address.equals("")|| password.equals("") ||roleName==null)
         {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter all fields!", ButtonType.OK);
             alert.setTitle("Warning");
@@ -192,8 +194,6 @@ public class userController implements Initializable {
             u.setPhoneNumber(mobilePhoneTxt.getText());
             u.setEmail(e_mailTxt.getText());
             u.setUserName(userNameTxt.getText());
-            u.setPassword(CryptMD5.cryptWithMD5(passwordTxt.getText()));
-
 
             if(roleTxt.getValue().equals("Admin"))
                 u.setRole_FK(1);
@@ -202,6 +202,7 @@ public class userController implements Initializable {
 
             try {
                 if (this.selectedUser == null) {
+                    u.setPassword(CryptMD5.cryptWithMD5(password));
                     u.save();
                     this.fillUsers();
                     this.removeSelection();
@@ -212,8 +213,10 @@ public class userController implements Initializable {
                 }
                 else
                 {
-                    if(password.equals(passwordTxt.getText()))
+                    if(password.equals(this.selectedUser.getPassword()))
                         u.setPassword(password);
+                    else
+                        u.setPassword(CryptMD5.cryptWithMD5(password));
                     u.update();
                     this.fillUsers();
                     this.removeSelection();
@@ -226,11 +229,12 @@ public class userController implements Initializable {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
+
         }
     }
 
     @FXML
-    public void selectUser(MouseEvent evt){
+    public void selectUser(MouseEvent evt) {
         this.selectedUser = (User) this.usersTbl.getSelectionModel().getSelectedItem();
         if(selectedUser!=null)
         {
@@ -251,7 +255,7 @@ public class userController implements Initializable {
     }
 
     @FXML
-    protected void removeSelection(){
+    protected void removeSelection() {
         this.selectedUser = null;
         this.fillUsers();
         this.btnSave.setText("Add");
@@ -266,8 +270,7 @@ public class userController implements Initializable {
     }
 
     @FXML
-    public void onDelete()
-    {
+    public void onDelete() {
         if (selectedUser != null){
             try {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -317,8 +320,9 @@ public class userController implements Initializable {
         }
         return FXCollections.observableList(filteredList);
     }
+
     @FXML
-    void remove(MouseEvent event) {
+    public void remove(MouseEvent event) {
         if(this.selectedUser!=null)
         {
             usersTbl.getSelectionModel().clearSelection();

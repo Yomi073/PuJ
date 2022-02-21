@@ -97,8 +97,6 @@ public class Table {
         return DatabaseConnection.CONNECTION.createStatement().execute(CREATE_SQL_QUERY.toString());
     }
 
-
-
     public void save() throws Exception {
         String tableName = getTableName(getClass());
         StringBuilder INSERT_SQL_QUERY = new StringBuilder();
@@ -142,6 +140,7 @@ public class Table {
             id.set(this, rs.getInt(1));
         }
     }
+
     public void update() throws Exception {
         String tableName = getTableName(getClass());
         StringBuilder UPDATE_SQL_QUERY = new StringBuilder();
@@ -213,10 +212,10 @@ public class Table {
         return list;
     }
 
-    public static List<TempTable> listTempTable(ResultSet rs) throws Exception {
-        List<TempTable> list = new ArrayList<>();
+    public static List<Invoice> listTempTable(ResultSet rs) throws Exception {
+        List<Invoice> list = new ArrayList<>();
         while(rs.next()){
-            TempTable tt = new TempTable();
+            Invoice tt = new Invoice();
             tt.setId(rs.getInt(1));
             tt.setName(rs.getString(2));
             tt.setQuantity(rs.getDouble(3));
@@ -239,6 +238,7 @@ public class Table {
         }
         return list;
     }
+
     public static List<WorkerView> WorkerTasks(ResultSet rs) throws Exception {
         List<WorkerView> list = new ArrayList<>();
         while(rs.next()){
@@ -252,6 +252,5 @@ public class Table {
         }
         return list;
     }
-
 
 }

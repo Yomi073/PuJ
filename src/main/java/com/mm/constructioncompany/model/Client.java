@@ -19,12 +19,10 @@ public class Client extends Table{
     @Entity(type = "VARCHAR",size = 50)
     String email;
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
     public void setId(int id) {
-        id = id;
+        this.id = id;
     }
 
     public String getFirstName() {

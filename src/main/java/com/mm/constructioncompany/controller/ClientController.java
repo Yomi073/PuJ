@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class clientController implements Initializable {
+public class ClientController implements Initializable {
 
     @FXML
     private TableView clientsTbl;
@@ -62,7 +62,7 @@ public class clientController implements Initializable {
     @FXML
     private TextField searchTxt;
 
-    Client selectedClient=null;
+    private Client selectedClient=null;
 
 
     @Override
@@ -117,6 +117,7 @@ public class clientController implements Initializable {
 
 
     }
+
     private void fillClients(){
         try {
             List<?> clientsList = Table.list(Client.class);
@@ -128,7 +129,7 @@ public class clientController implements Initializable {
     }
 
     @FXML
-    void onDelete(ActionEvent event) {
+    public void onDelete(ActionEvent event) {
         if (selectedClient != null){
             try {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -160,7 +161,7 @@ public class clientController implements Initializable {
     }
 
     @FXML
-    void onSave(ActionEvent event) {
+    public void onSave(ActionEvent event) {
         String firstName = this.nameTxt.getText();
         String lastName = this.surnameTxt.getText();
         String adress=this.addressTxt.getText();
@@ -264,7 +265,7 @@ public class clientController implements Initializable {
     }
 
     @FXML
-    void remove(MouseEvent event) {
+    public void remove(MouseEvent event) {
         if(this.selectedClient!=null)
         {
             clientsTbl.getSelectionModel().clearSelection();

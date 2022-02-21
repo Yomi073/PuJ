@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane style="-fx-background-color: #bfe1ff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mm.constructioncompany.controller.workerViewController">
+<AnchorPane style="-fx-background-color: #bfe1ff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mm.constructioncompany.controller.WorkerViewController">
    <children>
       <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#myTasks" prefHeight="40.0" prefWidth="110.0" styleClass="info-button" stylesheets="@../../../Css/style.css" text="My tasks" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="25.0">
          <font>

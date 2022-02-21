@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane style="-fx-padding: 5; -fx-background-color: #bfe1ff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mm.constructioncompany.controller.sidebarController">
+<AnchorPane style="-fx-padding: 5; -fx-background-color: #bfe1ff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mm.constructioncompany.controller.SidebarController">
     <children>
           <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnLogoutClicked" prefHeight="40.0" prefWidth="110.0" styleClass="info-button" stylesheets="@../../../Css/style.css" text="Logout" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
          <font>

@@ -1,6 +1,6 @@
 package com.mm.constructioncompany.model;
 
-public class TempTable extends Table{
+public class Invoice extends Table{
 
     private int id;
     private String name;
@@ -36,8 +36,7 @@ public class TempTable extends Table{
         return sellingPrice;
     }
 
-    public void
-    setSellingPrice(Double sellingPrice)
+    public void setSellingPrice(Double sellingPrice)
     {
         this.sellingPrice = sellingPrice;
     }
@@ -49,7 +48,5 @@ public class TempTable extends Table{
     public void setSum() {
         this.sum = this.sellingPrice*this.quantity;
     }
-
-
 
 }

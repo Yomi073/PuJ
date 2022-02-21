@@ -18,7 +18,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class invoiceController implements Initializable {
+public class InvoiceController implements Initializable {
 
     @FXML
     private TableView materialsTbl;
@@ -68,21 +68,21 @@ public class invoiceController implements Initializable {
         try {
 
                 idTblCol.setCellValueFactory(
-                        (Callback<TableColumn.CellDataFeatures<TempTable, Long>, SimpleLongProperty>) tempTableLongCellDataFeatures -> new SimpleLongProperty(tempTableLongCellDataFeatures.getValue().getId())
+                        (Callback<TableColumn.CellDataFeatures<Invoice, Long>, SimpleLongProperty>) tempTableLongCellDataFeatures -> new SimpleLongProperty(tempTableLongCellDataFeatures.getValue().getId())
                 );
                 nameTblCol.setCellValueFactory(
-                        (Callback<TableColumn.CellDataFeatures<TempTable, String>, SimpleStringProperty>) tempTableLongCellDataFeatures -> new SimpleStringProperty(tempTableLongCellDataFeatures.getValue().getName())
+                        (Callback<TableColumn.CellDataFeatures<Invoice, String>, SimpleStringProperty>) tempTableLongCellDataFeatures -> new SimpleStringProperty(tempTableLongCellDataFeatures.getValue().getName())
                 );
                 quantityTblCol.setCellValueFactory(
-                        (Callback<TableColumn.CellDataFeatures<TempTable, Double>, SimpleDoubleProperty>) tempTableLongCellDataFeatures -> new SimpleDoubleProperty(tempTableLongCellDataFeatures.getValue().getQuantity())
+                        (Callback<TableColumn.CellDataFeatures<Invoice, Double>, SimpleDoubleProperty>) tempTableLongCellDataFeatures -> new SimpleDoubleProperty(tempTableLongCellDataFeatures.getValue().getQuantity())
                 );
 
                 priceTblCol.setCellValueFactory(
-                        (Callback<TableColumn.CellDataFeatures<TempTable, Double>, SimpleDoubleProperty>) tempTableLongCellDataFeatures -> new SimpleDoubleProperty(tempTableLongCellDataFeatures.getValue().getSellingPrice())
+                        (Callback<TableColumn.CellDataFeatures<Invoice, Double>, SimpleDoubleProperty>) tempTableLongCellDataFeatures -> new SimpleDoubleProperty(tempTableLongCellDataFeatures.getValue().getSellingPrice())
                 );
 
                 sumTblCol.setCellValueFactory(
-                        (Callback<TableColumn.CellDataFeatures<TempTable, Double>, SimpleDoubleProperty>) tempTableLongCellDataFeatures -> new SimpleDoubleProperty(tempTableLongCellDataFeatures.getValue().getSum())
+                        (Callback<TableColumn.CellDataFeatures<Invoice, Double>, SimpleDoubleProperty>) tempTableLongCellDataFeatures -> new SimpleDoubleProperty(tempTableLongCellDataFeatures.getValue().getSum())
                 );
 
             } catch (Exception e) {
@@ -92,8 +92,8 @@ public class invoiceController implements Initializable {
 
     protected void fillTempTable(){
         try {
-            List<TempTable> tempTableList = Table.listTempTable(makeQuery());
-            ObservableList<TempTable> materialsObservableList = FXCollections.observableList(tempTableList);
+            List<Invoice> tempTableList = Table.listTempTable(makeQuery());
+            ObservableList<Invoice> materialsObservableList = FXCollections.observableList(tempTableList);
             this.materialsTbl.setItems(materialsObservableList);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -105,15 +105,14 @@ public class invoiceController implements Initializable {
         this.selectedTask=t;
     }
 
-
     public ResultSet makeQuery() throws SQLException {
         String SQL = "SELECT MaterialStock.id, MaterialStock.name, SUM(MaterialConsumption.quantity),MaterialStock.sellingPrice FROM Task LEFT JOIN MaterialConsumption ON Task.id = MaterialConsumption.task_FK LEFT JOIN MaterialStock ON MaterialConsumption.materialStock_FK = MaterialStock.id WHERE Task.id="+selectedTask.getId()+" GROUP BY MaterialStock.name ";
         Statement stmt = DatabaseConnection.CONNECTION.createStatement();
         ResultSet rs = stmt.executeQuery(SQL);
         return rs;
     }
-    public void initController()throws Exception
-    {
+
+    public void initController()throws Exception {
         fillTempTable();
         this.invoiceLbl.setText(String.valueOf(this.selectedTask.getId()));
         this.clientIdLbl.setText(String.valueOf(this.selectedTask.getClient().getId()));
@@ -124,13 +123,12 @@ public class invoiceController implements Initializable {
         this.totalSumLbl.setText(getSum());
     }
 
-    public String getSum()
-    {
+    public String getSum() {
 
         Double sum=0.0;
         for(int i=0;i<materialsTbl.getItems().size();i++)
         {
-            TempTable item =(TempTable) materialsTbl.getItems().get(i);
+            Invoice item =(Invoice) materialsTbl.getItems().get(i);
             TableColumn col = (TableColumn) materialsTbl.getColumns().get(4);
             Double data = (Double) col.getCellObservableValue(item).getValue();
             sum+=data;

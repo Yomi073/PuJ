@@ -93,11 +93,11 @@ public class User extends Table{
 
     public int getRole_FK() { return Role_FK; }
 
-    public Role getRole()throws Exception { return (Role) Table.get(Role.class,Role_FK); }
-
     public void setRole_FK(int Role_FK) {
         this.Role_FK=Role_FK;
     }
+
+    public Role getRole()throws Exception { return (Role) Table.get(Role.class,Role_FK); }
 
     public String toString() { return this.userName; }
 

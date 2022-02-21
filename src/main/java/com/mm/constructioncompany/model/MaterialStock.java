@@ -1,6 +1,7 @@
 package com.mm.constructioncompany.model;
 
 public class MaterialStock extends Table{
+
     @Entity(type="INTEGER", size=32, primary = true)
     int id;
 
@@ -56,6 +57,7 @@ public class MaterialStock extends Table{
     public void setSellingPrice(Double sellingPrice) {
         this.sellingPrice = sellingPrice;
     }
+
     public String toString()
     {
         return this.name;

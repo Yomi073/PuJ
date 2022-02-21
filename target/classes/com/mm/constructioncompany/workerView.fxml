@@ -4,19 +4,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #bfe1ff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mm.constructioncompany.controller.workerViewController">
+<AnchorPane style="-fx-background-color: #bfe1ff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mm.constructioncompany.controller.WorkerViewController">
    <children>
-      <Button layoutX="534.0" layoutY="29.0" mnemonicParsing="false" onAction="#myTasks" prefHeight="37.0" prefWidth="111.0" styleClass="info-button" stylesheets="@../../../Css/style.css" text="My tasks">
+      <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#myTasks" prefHeight="40.0" prefWidth="110.0" styleClass="info-button" stylesheets="@../../../Css/style.css" text="My tasks" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="25.0">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="423.0" layoutY="29.0" mnemonicParsing="false" onAction="#myProfile" prefHeight="37.0" prefWidth="111.0" styleClass="info-button" stylesheets="@../../../Css/style.css" text="My profile">
+      <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#myProfile" prefHeight="40.0" prefWidth="110.0" styleClass="info-button" stylesheets="@../../../Css/style.css" text="My profile" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="25.0">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="645.0" layoutY="29.0" mnemonicParsing="false" onAction="#logout" prefHeight="37.0" prefWidth="111.0" styleClass="info-button" stylesheets="@../../../Css/style.css" text="Logout">
+      <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#logout" prefHeight="40.0" prefWidth="110.0" styleClass="info-button" stylesheets="@../../../Css/style.css" text="Logout" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0">
          <font>
             <Font size="14.0" />
          </font>

@@ -18,7 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class loginController implements Initializable {
+public class LoginController implements Initializable {
 
 
     @FXML
@@ -68,28 +68,16 @@ public class loginController implements Initializable {
                 ResultSet result = query.executeQuery();
 
                 if (result.next()){
-                    loginController.loggedUser = (User) Table.get(User.class, result.getInt("id"));
+                    LoginController.loggedUser = (User) Table.get(User.class, result.getInt("id"));
 
-                    String view="";
-                    String title="";
                     if(loggedUser.getRole().getName().equals("Admin"))
-                    {
-                        view = "adminView.fxml";
-                        title="Welcome "+loggedUser.getUserName();
-                    }
+                        Main.showWindow("task.fxml","Welcome "+loggedUser.getUserName(), 1200, 740);
                     else
-                    {
-                        view =  "workerView.fxml";
-                        title="Welcome "+loggedUser.getUserName();
+                        Main.showWindow("workerView.fxml","Welcome "+loggedUser.getUserName(), 900, 700);
 
-                    }
-                    if(view.equals("adminView.fxml"))
-                        Main.showWindow(view,title, 1200, 740);
-                    else
-                        Main.showWindow(view,title, 900, 700);
 
                 } else {
-                    Alert alert = new Alert(Alert.AlertType.WARNING, "Entered data doesn't exist in database!!", ButtonType.OK);
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Wrong credentials!!", ButtonType.OK);
                     alert.setTitle("Warning");
                     alert.setHeaderText("Error");
                     alert.showAndWait();
@@ -100,15 +88,15 @@ public class loginController implements Initializable {
             }
         }
     }
+
     @FXML
-    public void backToLogin()throws Exception
-    {
+    public void backToLogin()throws Exception {
         Main.showWindow("login.fxml","Login to the system",1200,400);
     }
+
     @FXML
-    public void btnSignupClicked()throws Exception
-    {
-        Main.showWindow("signup.fxml","Sign up!", 1200, 500);
+    public void btnSignupClicked()throws Exception {
+        Main.showWindow("signup.fxml","Sign up!", 1200, 600);
     }
 
     @FXML
@@ -164,7 +152,7 @@ public class loginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
+
 
 }

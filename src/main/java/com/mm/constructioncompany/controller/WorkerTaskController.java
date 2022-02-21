@@ -29,7 +29,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class workerTaskController implements Initializable {
+public class WorkerTaskController implements Initializable {
 
 
     @FXML
@@ -67,8 +67,7 @@ public class workerTaskController implements Initializable {
     fillWorkerTasks();
     }
 
-    private void fillWorkerTasks()
-    {
+    private void fillWorkerTasks() {
         try {
             List<WorkerView> workerTasks = Table.WorkerTasks(makeQueryforTasks());
             ObservableList<WorkerView> workerTasksObservableList = FXCollections.observableList(workerTasks);
@@ -78,9 +77,8 @@ public class workerTaskController implements Initializable {
         }
     }
 
-    public ResultSet makeQueryforTasks()throws SQLException
-    {
-        String SQL = "SELECT Task.id,Client.firstName,Client.address,Task.date,Client.id FROM Client LEFT JOIN Task ON Client.id = Task.Client_FK LEFT JOIN User ON User_FK=User.id  WHERE Task.User_FK="+loginController.loggedUser.getId();
+    public ResultSet makeQueryforTasks()throws SQLException {
+        String SQL = "SELECT Task.id,Client.firstName,Client.address,Task.date,Client.id FROM Client LEFT JOIN Task ON Client.id = Task.Client_FK LEFT JOIN User ON User_FK=User.id  WHERE Task.User_FK="+ LoginController.loggedUser.getId();
         Statement stmt = DatabaseConnection.CONNECTION.createStatement();
         ResultSet rs = stmt.executeQuery(SQL);
         return rs;
@@ -92,7 +90,7 @@ public class workerTaskController implements Initializable {
     }
 
     @FXML
-    void taskDetails(ActionEvent event) throws Exception {
+    public void taskDetails(ActionEvent event) throws Exception {
         if(selectedTask!=null)
         {
             Task t=new Task();
@@ -104,7 +102,7 @@ public class workerTaskController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(Main.class.getResource("invoice.fxml"));
             Parent root = fxmlLoader.load();
-            invoiceController incont = fxmlLoader.getController();
+            InvoiceController incont = fxmlLoader.getController();
             incont.setSelectedTask(t);
             incont.initController();
             Stage stage = new Stage();
@@ -115,7 +113,7 @@ public class workerTaskController implements Initializable {
     }
 
     @FXML
-    void remove(MouseEvent event) {
+    public void remove(MouseEvent event) {
         tasksTbl.getSelectionModel().clearSelection();
     }
 

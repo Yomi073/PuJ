@@ -13,7 +13,7 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class workerProfileController implements Initializable {
+public class WorkerProfileController implements Initializable {
 
     @FXML
     private TextField addressTxt;
@@ -39,17 +39,17 @@ public class workerProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    this.firstNameTxt.setText(loginController.loggedUser.getFirstName());
-    this.lastNameTxt.setText(loginController.loggedUser.getLastName());
-    this.addressTxt.setText(loginController.loggedUser.getAddress());
-    this.phoneNumTxt.setText(loginController.loggedUser.getPhoneNumber());
-    this.emailTxt.setText(loginController.loggedUser.getEmail());
-    this.userNameTxt.setText(loginController.loggedUser.getUserName());
-    this.passwordTxt.setText(loginController.loggedUser.getPassword());
+    this.firstNameTxt.setText(LoginController.loggedUser.getFirstName());
+    this.lastNameTxt.setText(LoginController.loggedUser.getLastName());
+    this.addressTxt.setText(LoginController.loggedUser.getAddress());
+    this.phoneNumTxt.setText(LoginController.loggedUser.getPhoneNumber());
+    this.emailTxt.setText(LoginController.loggedUser.getEmail());
+    this.userNameTxt.setText(LoginController.loggedUser.getUserName());
+    this.passwordTxt.setText(LoginController.loggedUser.getPassword());
     }
 
     @FXML
-    void editProfile(MouseEvent event) throws Exception {
+    public void editProfile(MouseEvent event) throws Exception {
     String firstName=this.firstNameTxt.getText();
     String lastName=this.lastNameTxt.getText();
     String address=this.addressTxt.getText();
@@ -58,7 +58,7 @@ public class workerProfileController implements Initializable {
     String userName=this.userNameTxt.getText();
     String password=this.passwordTxt.getText();
 
-    User u=loginController.loggedUser;
+    User u= LoginController.loggedUser;
 
     u.setFirstName(firstName);
     u.setLastName(lastName);
@@ -70,6 +70,8 @@ public class workerProfileController implements Initializable {
         u.setPassword((password));
     else
         u.setPassword(CryptMD5.cryptWithMD5(password));
+
+
 
     u.update();
 

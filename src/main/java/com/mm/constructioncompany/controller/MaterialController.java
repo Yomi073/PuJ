@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class materialController implements Initializable {
+public class MaterialController implements Initializable {
 
     @FXML
     private TableView materialsTbl;
@@ -56,10 +56,10 @@ public class materialController implements Initializable {
     @FXML
     private Button btnAdd;
 
-    MaterialStock selectedMaterial=null;
+    private MaterialStock selectedMaterial=null;
 
     @FXML
-    void onDelete(ActionEvent event) {
+    public void onDelete(ActionEvent event) {
         if (selectedMaterial != null){
             try {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -92,7 +92,7 @@ public class materialController implements Initializable {
     }
 
     @FXML
-    void onSave(ActionEvent event) {
+    public void onSave(ActionEvent event) {
         String name = this.nameTxt.getText();
         String quantity = this.quantityTxt.getText();
         String purchasePrice = this.purchasePriceTxt.getText();
@@ -143,7 +143,6 @@ public class materialController implements Initializable {
             }
         }
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -221,8 +220,6 @@ public class materialController implements Initializable {
         }
     }
 
-
-
     private boolean searchFindsMaterial(MaterialStock material, String searchText) throws Exception {
         return (material.getName().toLowerCase().contains(searchText.toLowerCase())) ||
                (String.valueOf((material.getQuantity())).contains(searchText.toLowerCase())) ||
@@ -230,7 +227,6 @@ public class materialController implements Initializable {
                (Double.valueOf(material.getSellingPrice()).toString().equals(searchText.toLowerCase())) ||
                (Double.valueOf(material.getPurchasePrice()).toString().equals(searchText.toLowerCase()));
     }
-
 
     private ObservableList<MaterialStock> filterList(List<MaterialStock> list, String searchText) throws Exception {
         List<MaterialStock> filteredList = new ArrayList<>();
@@ -240,6 +236,7 @@ public class materialController implements Initializable {
         }
         return FXCollections.observableList(filteredList);
     }
+
     public static boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;
@@ -253,7 +250,7 @@ public class materialController implements Initializable {
     }
 
     @FXML
-    void remove(MouseEvent event) {
+   public void remove(MouseEvent event) {
         if(this.selectedMaterial!=null)
         {
             materialsTbl.getSelectionModel().clearSelection();
