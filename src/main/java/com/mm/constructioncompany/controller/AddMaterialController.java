@@ -105,8 +105,8 @@ public class AddMaterialController implements Initializable {
         boolean isSelectMaterialEmpty =(this.selectMaterial.getValue() == null);
 
 
-        if ( isSelectMaterialEmpty || quantityTxt.getText().equals("") ) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter all fields!", ButtonType.OK);
+        if ( isSelectMaterialEmpty || quantityTxt.getText().equals("") || !isNumeric(quantityTxt.getText()) ) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "All fields are mandatory and quantity must be a number!", ButtonType.OK);
             alert.setTitle("Warning");
             alert.setHeaderText("Input error!");
             alert.showAndWait();
@@ -307,7 +307,17 @@ public class AddMaterialController implements Initializable {
 
     }
 
-
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
 
 
 }
